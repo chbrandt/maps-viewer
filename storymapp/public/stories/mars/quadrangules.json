@@ -1,0 +1,77 @@
+[
+  {
+    "type": "Feature",
+    "properties": {
+      "title": "Diacria",
+      "text": "Diacria is the name of a telescopic albedo feature located at 48° N and 190° E on Mars. The feature was named by Greek astronomer E. M. Antoniadi in 1930 after Diacria, the highlands around Marathon in north-west Attica, Greece. The name was approved by the International Astronomical Union (IAU) in 1958.",
+      "order": 1,
+      "media": {
+        "thumbnail": "assets/DiacriaRegion.png",
+        "type": "image",
+        "data": "assets/DiacriaRegion.png"
+        }
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [-120, 65],
+          [-180, 65],
+          [-180, 30],
+          [-120, 30],
+          [-120, 65]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "title": "Mare Acidalium",
+      "text": "Mare Acidalium (Acidalian Sea) is the name of a telescopic albedo feature located at 45° N and 330° E on Mars. The feature was named for a well or fountain in Boeotia, Greece. According to classical tradition, it is a location where Venus and the Graces bathed.[5] The name was approved by the International Astronomical Union (IAU) in 1958.",
+      "order": 2,
+      "media": {
+        "thumbnail": "assets/MareAcidaliumRegion.png",
+        "type": "image",
+        "data": "assets/MareAcidaliumRegion.png"
+        }
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [0, 65],
+          [-60, 65],
+          [-60, 30],
+          [0, 30],
+          [0, 65]
+        ]
+      ]
+    }
+  },
+  {
+    "type": "Feature",
+    "properties": {
+      "title": "Amazonis",
+      "text": "Amazonis quadrangle contains the region called Amazonis Planitia. This area is considered to be among the youngest parts of Mars because it has a very low density of craters. The Amazonia period is named after this area. This quadrangle contains special, unusual features called the Medusae Fossae Formation and Sulci.",
+      "order": 3,
+      "media": {
+        "thumbnail": "assets/AmazonisRegion.png",
+        "type": "image",
+        "data": "assets/AmazonisRegion.png"
+      }
+    },
+    "geometry": {
+      "type": "Polygon",
+      "coordinates": [
+        [
+          [-135, 30],
+          [-180, 30],
+          [-180, 0],
+          [-135, 0],
+          [-135, 30]
+        ]
+      ]
+    }
+  }
+]
