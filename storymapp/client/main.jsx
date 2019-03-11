@@ -6,5 +6,6 @@ import App from '/imports/ui/App'
 
 Meteor.startup(() => {
   var bodies = ["mars","moon"];
+  
   render(<App bodies={bodies}/>, document.getElementById('app'));
 });

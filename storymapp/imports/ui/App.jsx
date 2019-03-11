@@ -2,6 +2,7 @@ import React from 'react';
 
 import Menu from './Menu.jsx';
 import Map from './Map/Map.jsx';
+// import List from './List.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,9 +15,9 @@ class App extends React.Component {
 
   render () {
     return (
-      <main style={{width:'100%', height:'100%'}}>
+      <main style={{height:'100%'}}>
         <Menu bodies={this.props.bodies} setBody={this.setBody}/>
-        <div style={{width:'100%', height:'90%'}}>
+        <div style={{height:'90%'}}>
           <Map body={this.state.body}/>
         </div >
       </main>

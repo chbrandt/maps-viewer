@@ -19,7 +19,6 @@ export default class Menu extends React.Component {
 
   renderBodyLinks () {
     return this.props.bodies.map((body,i) => {
-      console.log(body);
       return (
         <button type="button" className="btn btn-secondary text-capitalize" onClick={this.onBodySelect.bind(this)} key={body} value={body}>
           {body}
