@@ -3,6 +3,8 @@ import React from 'react';
 //  Leaflet style, `leaflet.css`, is being loaded in <head />, wherever it is.
 import L from 'leaflet';
 
+import './plugins/leaflet_control_infobox.js';
+
 // Load basemaps and overlays definitions
 import { baseMaps, overlayMaps } from './basemaps.js';
 
@@ -77,6 +79,13 @@ function setMap(body) {
       [bounds.getEast(), bounds.getNorth()]
     ];
   });
+
+  var zoombox = L.control.infobox({position:'bottomleft'}).addTo(map);
+
+  map.on('zoomend', (event) => {
+    var zoom = map.getZoom();
+    zoombox.setValue(zoom);
+  })
 
   // We will need the 'map' in other moments of the Component's life-cycle..
   return map;

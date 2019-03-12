@@ -4,6 +4,7 @@ const baseMaps = {
       label: "Hillshade",
       url: "https://s3.amazonaws.com/opmbuilder/301_moon/tiles/w/hillshaded-albedo/{z}/{x}/{y}.png",
       options: {
+        maxZoom: 6,
         tms: true,
         autoZIndex: true,
         attribution: "LOLA/USGS <a href='https://github.com/openplanetary/opm/wiki/OPM-Basemaps' target='_blank'>OpenPlanetaryMap</a>"
