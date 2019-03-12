@@ -49,7 +49,11 @@ function setMap(body) {
   var bmSet = {}
   var bm;
   baseMaps[body].forEach((pars) => {
-    bm = new L.tileLayer(pars.url, pars.options);
+    if (pars.wms) {
+      bm = new L.tileLayer.wms(pars.url, pars.options);
+    } else {
+      bm = new L.tileLayer(pars.url, pars.options);
+    }
     bmSet[pars.label] = bm;
   });
   bm.addTo(map);
