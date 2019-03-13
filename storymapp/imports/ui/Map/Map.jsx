@@ -6,7 +6,7 @@ import L from 'leaflet';
 import './plugins/leaflet_control_infobox.js';
 
 // Load basemaps and overlays definitions
-import { baseMaps, overlayMaps } from './basemaps.js';
+import { baseMaps, overlayMaps } from '/imports/api/basemaps.js';
 
 
 export default class Map extends React.Component {

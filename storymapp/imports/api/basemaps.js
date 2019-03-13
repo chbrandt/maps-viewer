@@ -10,6 +10,19 @@ const baseMaps = {
         attribution: "LOLA/USGS <a href='https://github.com/openplanetary/opm/wiki/OPM-Basemaps' target='_blank'>OpenPlanetaryMap</a>"
       }
     },
+    {
+      label: "LOLA",
+      url: "http://localhost:8888/moon/wms",
+      wms: true,
+      options: {
+        layers: "moon:Lunar_LRO_LOLA_ClrShade_Global_128ppd_v04",
+        format: "image/png",
+        transparent: true,
+        version: "1.3.0",
+        attribution: "USGS",
+        crs: L.CRS.EPSG3857,
+      }
+    },
   ],
   mars: [
     {
@@ -64,17 +77,35 @@ const baseMaps = {
         attribution: "Celestia/praesepe <a href='https://github.com/openplanetary/opm/wiki/OPM-Basemaps' target='_blank'>OpenPlanetaryMap</a>"
       }
     },
-    // {
-    //   label: "Hillshade",
-    //   url: "https://s3.us-east-2.amazonaws.com/opmmarstiles/hillshade-tiles/{z}/{x}/{y}.png",
-    //   options: {
-    //     maxNativeZoom: 7,
-    //     tms:true,
-    //     autoZIndex: true,
-    //     attribution: "NASA/MOLA <a href='https://github.com/openplanetary/opm/wiki/OPM-Basemaps' target='_blank'>OpenPlanetaryMap</a>"
-    //   }
-    // }
   ],
+  mercury: [
+    {
+      label: "BDR",
+      url: "http://localhost:8888/mercury/wms",
+      wms: true,
+      options: {
+        layers: "mercury:Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m",
+        format: "image/png",
+        transparent: true,
+        version: "1.3.0",
+        attribution: "USGS",
+        crs: L.CRS.EPSG3857,
+      }
+    },
+    {
+      label: "DEM",
+      url: "http://localhost:8888/mercury/wms",
+      wms: true,
+      options: {
+        layers: "mercury:Mercury_Messenger_USGS_DEM_Global_665m_v2",
+        format: "image/png",
+        transparent: true,
+        version: "1.3.0",
+        attribution: "USGS",
+        crs: L.CRS.EPSG3857,
+      }
+    },
+  ]
 }
 
 const overlayMaps = {
@@ -92,4 +123,23 @@ const overlayMaps = {
   ]
 }
 
-export { baseMaps, overlayMaps};
+const Maps = {
+  basemaps: baseMaps,
+  overlays: overlayMaps,
+  bodies: function(mtype) {
+    mtype = mtype || 'basemap';
+    var out = null;
+    if (['basemap','overlay'].indexOf(mtype) == -1) {
+      console.log("Wrong argument. Accepted arguments are: 'basemap', 'overlay'.");
+      return out;
+    }
+    if (mtype=='basemap') {
+      out = Object.keys(this.basemaps);
+    } else {
+      out = Object.keys(this.overlays);
+    }
+    return out;
+  }
+}
+
+export { baseMaps, overlayMaps, Maps };
