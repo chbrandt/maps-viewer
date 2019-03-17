@@ -6,7 +6,7 @@ import L from 'leaflet';
 import './plugins/leaflet_control_infobox.js';
 
 // Load basemaps and overlays definitions
-import { baseMaps, overlayMaps } from './basemaps.js';
+import { baseMaps, overlayMaps } from '/imports/api/basemaps.js';
 
 
 export default class Map extends React.Component {
@@ -49,7 +49,11 @@ function setMap(body) {
   var bmSet = {}
   var bm;
   baseMaps[body].forEach((pars) => {
-    bm = new L.tileLayer(pars.url, pars.options);
+    if (pars.wms) {
+      bm = new L.tileLayer.wms(pars.url, pars.options);
+    } else {
+      bm = new L.tileLayer(pars.url, pars.options);
+    }
     bmSet[pars.label] = bm;
   });
   bm.addTo(map);
