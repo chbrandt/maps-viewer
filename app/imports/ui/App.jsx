@@ -14,12 +14,23 @@ class App extends React.Component {
   }
 
   render () {
+    /*
+      'render' will be called either when 'state' or 'props' change.
+      currently, at least, it means the "body" has changed;
+      when that happens, we get a bunch of new data from somewhere -- e.g., WMS --,
+      "locations" in particular is the list of locations ("label", "coordinates")
+      of interest, which will be used in the search box auto-completion.
+    */
+    var locations = undefined;
+    
     return (
       <main style={{height:'100%'}}>
-        <Menu bodies={this.props.bodies} setBody={this.setBody}/>
+        <Menu bodies={this.props.bodies}
+              setBody={this.setBody}
+              locations={locations}/>
         <div style={{height:'90%'}}>
           <Map body={this.state.body}/>
-        </div >
+        </div>
       </main>
     );
   }
