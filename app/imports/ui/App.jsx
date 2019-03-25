@@ -13,7 +13,12 @@ class App extends React.Component {
     this.setBody = this.setBody.bind(this);
   }
 
-  render () {
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(nextState.body + this.state.body);
+    return nextState.body !== this.state.body;
+  }
+
+  render() {
     /*
       'render' will be called either when 'state' or 'props' change.
       currently, at least, it means the "body" has changed;
@@ -22,7 +27,7 @@ class App extends React.Component {
       of interest, which will be used in the search box auto-completion.
     */
     var locations = undefined;
-    
+
     return (
       <main style={{height:'100%'}}>
         <Menu bodies={this.props.bodies}
@@ -36,7 +41,7 @@ class App extends React.Component {
   }
   // <List items=props.stories/>
 
-  setBody (body) {
+  setBody(body) {
     console.log(body);
     this.setState({body:body});
   }

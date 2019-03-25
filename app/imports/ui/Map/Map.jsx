@@ -1,8 +1,12 @@
 import React from 'react';
+import { Session } from 'meteor/session';
+import { Tracker } from 'meteor/tracker';
+
 
 //  Leaflet style, `leaflet.css`, is being loaded in <head />, wherever it is.
 import L from 'leaflet';
 
+import './plugins/Leaflet.SimpleGraticule/L.SimpleGraticule.js';
 import './plugins/leaflet_control_infobox.js';
 
 // Load basemaps and overlays definitions
@@ -32,6 +36,20 @@ export default class Map extends React.Component {
 
   componentDidMount() {
     this.map = setMap(this.props.body);
+    // this.map.panTo([10,100]);
+
+    Tracker.autorun(() => {
+      var latlng = Session.get('latlng');
+      var _ll = L.latLng(latlng[0],latlng[1]);
+      console.log("LatLng: " + JSON.stringify(latlng));
+      console.log(latlng);
+      // console.log(_ll);
+      // console.log(this.map.getCenter());
+      if (latlng) {
+        this.map.panTo(_ll);
+        // console.log(this.map.getCenter());
+      }
+    });
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -69,6 +87,16 @@ function setMap(body) {
   // }
 
   L.control.layers(bmSet, omSet, {position: 'topright'}).addTo(map);
+
+  var options_ = {interval: 20,
+               showOriginLabel: true,
+               redraw: 'move',
+               zoomIntervals: [
+                {start: 0, end: 3, interval: 50},
+                {start: 4, end: 5, interval: 5},
+                {start: 6, end: 20, interval: 1}
+            ]};
+  L.simpleGraticule(options_).addTo(map);
 
   /*
     Connect any map "move" event to the update of global 'bbox' variable.
