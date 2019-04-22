@@ -25,3 +25,22 @@ vector data covering the entire planet -- will be explicitly called _global maps
   - [ ] _named location_.
 
 - [ ] Download underlying datasets
+
+
+## Workflow
+
+* [User] Select a body
+  * Mars
+  * Mercury
+  * Moon
+* Loads _all data_ for selected body
+  * "_all data_" is internally defined and grouped as
+    * global basemap
+    * raster layers
+    * vector layers
+* Each (local) map must be labeled, labels are used to
+  1. populate map' widget controls to show/hide accordingly,
+  2. populate search/combobox options, besides (lat,lon) search.
+  * _Local maps are usually a group of (raster/vector) layers_
+* [User] Select a map
+* Pops up a list of associated files for download
