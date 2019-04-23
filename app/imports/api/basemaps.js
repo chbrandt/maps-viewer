@@ -1,8 +1,18 @@
 const baseMaps = {
+  mercury: [
+    {
+      label: "bla",
+      service: 'tms',
+      options: {
+        url: "http://localhost:8080/gwc/service/tms/1.0.0/mercury%3AMercury_MESSENGER_MDIS_Basemap_MD3Color_Mosaic_Global_665m-MERCATOR@EPSG%3A900913@jpeg/{z}/{x}/{-y}.jpg",
+        attributions: "USGS",
+      },
+    }
+  ],
   moon: [
     {
       label: "Hillshade",
-      url: "https://s3.amazonaws.com/opmbuilder/301_moon/tiles/w/hillshaded-albedo/{z}/{x}/{y}.png",
+      url: "https://s3.amazonaws.com/opmbuilder/301_moon/tiles/w/hillshaded-albedo/{z}/{x}/{-y}.png",
       options: {
         maxZoom: 6,
         tms: true,
@@ -27,7 +37,7 @@ const baseMaps = {
   mars: [
     {
       label: "OPM",
-      url: "https://cartocdn-gusc.global.ssl.fastly.net/nmanaud/api/v1/map/named/opm-mars-basemap-v0-1/0,1,2,3,4/{z}/{x}/{y}.png",
+      url: "https://cartocdn-gusc.global.ssl.fastly.net/nmanaud/api/v1/map/named/opm-mars-basemap-v0-1/0,1,2,3,4/{z}/{x}/{-y}.png",
       options: {
         maxNativeZoom: 9,
         zoom: 3,
@@ -38,7 +48,7 @@ const baseMaps = {
     },
     {
       label: "Mola (gray)",
-      url: "http://s3-eu-west-1.amazonaws.com/whereonmars.cartodb.net/mola-gray/{z}/{x}/{y}.png",
+      url: "http://s3-eu-west-1.amazonaws.com/whereonmars.cartodb.net/mola-gray/{z}/{x}/{-y}.png",
       options: {
         maxNativeZoom: 9,
         tms:true,
@@ -48,7 +58,7 @@ const baseMaps = {
     },
     {
       label: "Mola (color)",
-      url: "http://s3-eu-west-1.amazonaws.com/whereonmars.cartodb.net/mola-color/{z}/{x}/{y}.png",
+      url: "http://s3-eu-west-1.amazonaws.com/whereonmars.cartodb.net/mola-color/{z}/{x}/{-y}.png",
       options: {
         maxNativeZoom: 6,
         tms: true,
@@ -58,7 +68,7 @@ const baseMaps = {
     },
     {
       label: "Viking",
-      url: "http://s3-eu-west-1.amazonaws.com/whereonmars.cartodb.net/viking_mdim21_global/{z}/{x}/{y}.png",
+      url: "http://s3-eu-west-1.amazonaws.com/whereonmars.cartodb.net/viking_mdim21_global/{z}/{x}/{-y}.png",
       options: {
         maxNativeZoom: 7,
         tms:true,
@@ -68,7 +78,7 @@ const baseMaps = {
     },
     {
       label: "Texture",
-      url: "http://s3-eu-west-1.amazonaws.com/whereonmars.cartodb.net/celestia_mars-shaded-16k_global/{z}/{x}/{y}.png",
+      url: "http://s3-eu-west-1.amazonaws.com/whereonmars.cartodb.net/celestia_mars-shaded-16k_global/{z}/{x}/{-y}.png",
       options: {
         maxNativeZoom: 5,
         zoom: 3,
@@ -112,7 +122,7 @@ const overlayMaps = {
   mars: [
     {
       label: "OPM Labels",
-      url: "https://cartocdn-gusc.global.ssl.fastly.net/opmbuilder/api/v1/map/named/opm-mars-basemap-v0-1/5/{z}/{x}/{y}.png",
+      url: "https://cartocdn-gusc.global.ssl.fastly.net/opmbuilder/api/v1/map/named/opm-mars-basemap-v0-1/5/{z}/{x}/{-y}.png",
       options: {
         tms: false,
         autoZIndex: true,
