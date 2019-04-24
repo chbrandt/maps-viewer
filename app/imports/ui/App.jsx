@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Menu from './Menu.jsx';
-import Map from './Map/Map.jsx';
+import MapApp from './Map/Map.jsx';
 // import List from './List.jsx';
 
 class App extends React.Component {
@@ -34,7 +34,7 @@ class App extends React.Component {
               setBody={this.setBody}
               locations={locations}/>
         <div style={{height:'90%'}}>
-          <Map body={this.state.body}/>
+          <MapApp body={this.state.body}/>
         </div>
       </main>
     );

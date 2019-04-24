@@ -3,6 +3,7 @@ import { Session } from 'meteor/session';
 import { Tracker } from 'meteor/tracker';
 
 import proj4 from 'proj4';
+
 // import {register} from 'ol/proj/proj4';
 // import {get as getProjection} from 'ol/proj';
 
@@ -72,62 +73,105 @@ function setMap(body) {
     '+units=m +nadgrids=@null +wktext +no_defs');
   ol.proj.proj4.register(proj4);
   const mercury_mercator = ol.proj.get('EPSG:999999');
+
+  var vectorSource = new ol.source.Vector({
+    format: new ol.format.GeoJSON(),
+    url: function(extent) {
+      return 'http://localhost:8080/mercury/wfs?service=WFS&' +
+          'version=1.1.0&request=GetFeature&' +
+          'typename=mercury:H05_geological_units_3_classes-MERCATOR&' +
+          'outputFormat=application/json&srsname=EPSG:3857&' +
+          'bbox=' + extent.join(',');
+    },
+    strategy: ol.loadingstrategy.bbox,
+    crossOrigin: null
+  });
+
+  var vector = new ol.layer.Vector({
+    source: vectorSource,
+    style: new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: 'rgba(0, 0, 255, 1.0)',
+        width: 2
+      })
+    })
+  });
+
+  var wmsSource = new ol.source.ImageWMS({
+    url: 'http://localhost:8080/mercury/wms',
+    params: {'LAYERS': 'mercury:hokusai_450_mpx_Band1of8_255-MERCATOR'},
+    serverType: 'geoserver',
+    crossOrigin: null
+  });
+
+  var wmsLayer = new ol.layer.Image({
+    source: wmsSource
+  });
+
+  var xyzSource = new ol.source.XYZ({
+    url: "http://localhost:8080/gwc/service/tms/1.0.0/mercury%3AMercury_MESSENGER_MDIS_Basemap_MD3Color_Mosaic_Global_665m-MERCATOR@EPSG%3A900913@jpeg/{z}/{x}/{-y}.jpg",
+  });
+
+  var xyzLayer = new ol.layer.Tile({
+    source: xyzSource
+  });
+
   var map = new ol.Map({
+    layers: [xyzLayer,wmsLayer,vector],
     target: 'map',
     view: new ol.View({
-      projection: mercury_mercator,
-      center: ol.proj.fromLonLat([0,0]),
+      // projection: mercury_mercator,
+      // center: ol.proj.fromLonLat([0,0]),
+      center: [0,0],
       zoom: 2
     })
   });
-
-  // var map = L.map('map', {center: [0, 0],
-  //                         maxBounds:[[-90,-180],[90,180]],
-  //                         zoom: 3});
-
-  var bmSet = {}
-  var bm;
-  baseMaps[body].forEach((pars) => {
-    if (pars.wms || pars.service == 'wms') {
-      bm = new ol.layer.Tile({
-        source: new ol.source.WMTS({
-          ...pars.options
-        })
-      })
-    } else if (pars.service == 'tms'){
-      bm = new ol.layer.Tile({
-        source: new ol.source.XYZ({
-          ...pars.options
-        })
-      })
-    }
-    bmSet[pars.label] = bm;
-  });
-  map.addLayer(bm)
+  // var bmSet = {}
+  // var bm;
+  // baseMaps[body].forEach((pars) => {
+  //   if (pars.wms || pars.service == 'wms') {
+  //     bm = new ol.layer.Tile({
+  //       source: new ol.source.WMTS({
+  //         ...pars.options
+  //       })
+  //     })
+  //   } else if (pars.service == 'tms'){
+  //     bm = new ol.layer.Tile({
+  //       source: new ol.source.XYZ({
+  //         ...pars.options
+  //       })
+  //     })
+  //   }
+  //   bmSet[pars.label] = bm;
+  // });
+  // map.addLayer(bm)
   // bm.addTo(map);
 
   //
-  var omSet = {}
-  var om;
-  if (overlayMaps[body]) {
-    overlayMaps[body].forEach((pars) => {
-      if (pars.wms) {
-        om = new ol.layer.Tile({
-          source: new ol.source.TileWMS({
-            url: pars.url
-          })
-        })
-      } else {
-        om = new ol.layer.Tile({
-          source: new ol.source.XYZ({
-            url: pars.url
-          })
-        })
-      }
-      omSet[pars.label] = om;
-      map.addLayer(om)
-    })
-  }
+  // var omSet = {}
+  // var om;
+  // if (overlayMaps[body]) {
+  //   overlayMaps[body].forEach((pars) => {
+  //     if (pars.wms) {
+  //       console.log(pars);
+  //       om = new ol.layer.Tile({
+  //         source: new ol.source.TileWMS({
+  //           url: pars.url,
+  //           params: pars.params,
+  //           serviceType: pars.serviceType
+  //         })
+  //       })
+  //     } else {
+  //       om = new ol.layer.Tile({
+  //         source: new ol.source.XYZ({
+  //           url: pars.url
+  //         })
+  //       })
+  //     }
+  //     omSet[pars.label] = om;
+  //     map.addLayer(om)
+  //   })
+  // }
   //
   // L.control.layers(bmSet, omSet, {position: 'topright'}).addTo(map);
   //

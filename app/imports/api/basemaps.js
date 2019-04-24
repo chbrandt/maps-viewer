@@ -130,6 +130,23 @@ const overlayMaps = {
         attribution: "USGS"
       }
     }
+  ],
+  mercury: [
+    {
+      label: "Hokusai",
+      wms: true,
+      url: "http://localhost:8080/mercury/wms",
+      params: {'LAYERS':"mercury:hokusai_450_mpx_Band1of8_255-MERCATOR", 'TILED':true},
+      serverType: 'geoserver',
+      // options: {
+      //   layers: "mercury:hokusai_450_mpx_Band1of8_255-MERCATOR",
+      //   format: "image/png",
+      //   transparent: true,
+      //   version: "1.3.0",
+      //   attribution: "USGS",
+      //   crs: L.CRS.EPSG3857,
+      // }
+    }
   ]
 }
 
