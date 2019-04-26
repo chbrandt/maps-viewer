@@ -1,0 +1,148 @@
+<!DOCTYPE html -->
+<html>
+<head>
+  <title>Vector tiles</title>
+  <script src="http://localhost:8080/openlayers3/ol.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="http://localhost:8080/openlayers3/ol.css" type="text/css">
+  <style>
+    html, body {
+      font-family: sans-serif;
+      width: 100%;
+    }
+    .map {
+      height: 500px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h3>Mapbox Protobuf - vector tiles</h3>
+  <div id="map" class="map"></div>
+  <script>
+
+  var style_simple = new ol.style.Style({
+    fill: new ol.style.Fill({
+      color: '#ADD8E6'
+    }),
+    stroke: new ol.style.Stroke({
+      color: '#880000',
+      width: 1
+    })
+  });
+
+  function simpleStyle(feature) {
+    return style_simple;
+  }
+
+  // var layer = 'opengeo:countries';
+  // var layer = 'mercury:H05_surface_features';
+  var projection_epsg_no = '900913';
+  var format = 'image/png';
+  var bounds = [-7664543.596963018, -10133207.06495813,
+                7664445.871936496, 10133306.707830522];
+
+  var _projection = new ol.proj.Projection({
+    code: 'bla',
+    units: 'm',
+    extent: [-7663601.119166941, -3831800.559566609,
+              7663601.119133218, 3831800.5595834707]
+  })
+
+  var map = new ol.Map({
+    target: 'map',
+    view: new ol.View({
+      projection: 'EPSG:4326',
+      center: [0, 0],
+      zoom: 2
+    }),
+    // layers: [new ol.layer.VectorTile({
+    //   style:simpleStyle,
+    //   source: new ol.source.VectorTile({
+    //     tilePixelRatio: 1, // oversampling when > 1
+    //     tileGrid: ol.tilegrid.createXYZ({maxZoom: 19}),
+    //     format: new ol.format.MVT(),
+    //     url: '/geoserver/gwc/service/tms/1.0.0/' + layer +
+    //         '@EPSG%3A'+projection_epsg_no+'@pbf/{z}/{x}/{-y}.pbf'
+    //   })
+    // })]
+    layers: [
+      // new ol.layer.Tile({
+      //   source: new ol.source.XYZ({
+      //     url: "http://localhost:8080/gwc/service/tms/1.0.0/" +
+      //           "mercury:mercury_global_color_665m_EPSG4326@EPSG:4326@jpeg/{z}/{x}/{-y}.jpg",
+      //   })
+      // }),
+      new ol.layer.Tile({
+        source: new ol.source.TileWMS({
+          url: 'http://localhost:8080/mercury/wms',
+          params: {LAYERS: 'mercury:mercury_global_color_665m_EPSG4326'}
+        })
+      }),
+      // new ol.layer.Vector({
+      //   source: new ol.source.Vector({
+      //     format: new ol.format.GeoJSON(),
+      //     url: function(extent) {
+      //       return 'http://localhost:8080/wfs?' +
+      //           'service=WFS&version=1.0.0&request=GetFeature&' +
+      //           'outputFormat=application/json&' +
+      //           'typename=mercury:H05_surface_features-WEB_MERCATOR&' +
+      //           'outputFormat=application/json&srsname=EPSG:3857&' +
+      //           'bbox=' + extent.join(',');
+      //     },
+      //     strategy: ol.loadingstrategy.bbox,
+      //     crossOrigin: null
+      //   }),
+      //   style: style_simple
+      // }),
+  // var vectorSource = new ol.source.Vector({
+  //   format: new ol.format.GeoJSON(),
+  //   url: function(extent) {
+  //     return 'http://localhost:8080/mercury/wfs?service=WFS&' +
+  //         'version=1.1.0&request=GetFeature&' +
+  //         'typename=mercury:H05_geological_units_3_classes-MERCATOR&' +
+  //         'outputFormat=application/json&srsname=EPSG:3857&' +
+  //         'bbox=' + extent.join(',');
+  //   },
+  //   strategy: ol.loadingstrategy.bbox,
+  //   crossOrigin: null
+  // });
+  //
+  // var vector = new ol.layer.Vector({
+  //   source: vectorSource,
+  //   style: new ol.style.Style({
+  //     stroke: new ol.style.Stroke({
+  //       color: 'rgba(0, 0, 255, 1.0)',
+  //       width: 2
+  //     })
+  //   })
+  // });
+      // new ol.layer.Tile({
+      //   visible: false,
+      //   source: new ol.source.TileWMS({
+      //     url: 'http://localhost:8080/mercury/wms',
+      //     params: {'FORMAT': format,
+      //              'VERSION': '1.1.1',
+      //              tiled: true,
+      //           "LAYERS": 'mercury:Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m-WEB_MERCATOR',
+      //           "exceptions": 'application/vnd.ogc.se_inimage',
+      //        tilesOrigin: 0 + "," + 0
+      //     }
+      //   })
+      // }),
+    ]
+  });
+
+
+  // var xhr = new XMLHttpRequest();
+  // xhr.open("POST", "http://localhost:8080/wfs", true);
+  // var params = 'service=WFS&version=1.1.0&request=GetFeature&outputFormat=application/json&typename=mercury:H05_surface_features-WEB_MERCATOR';
+  // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  // xhr.onreadystatechange = function() { // Call a function when the state changes.
+  //   if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+  //     console.log(xhr.responseText);
+  //   }
+  // }
+  // xhr.send(params);
+  </script>
+</body>
+</html>

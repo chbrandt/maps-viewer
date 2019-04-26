@@ -4,16 +4,6 @@ import { Tracker } from 'meteor/tracker';
 
 import proj4 from 'proj4';
 
-// import {register} from 'ol/proj/proj4';
-// import {get as getProjection} from 'ol/proj';
-
-
-//  Leaflet style, `leaflet.css`, is being loaded in <head />, wherever it is.
-// import L from 'leaflet';
-//
-// import './plugins/Leaflet.SimpleGraticule/L.SimpleGraticule.js';
-// import './plugins/leaflet_control_infobox.js';
-
 // Load basemaps and overlays definitions
 import { baseMaps, overlayMaps } from '/imports/api/basemaps.js';
 
@@ -67,49 +57,50 @@ export default class Map extends React.Component {
 }
 
 function setMap(body) {
-  proj4.defs('EPSG:999999',
-    '+proj=merc +a=2439700 +b=2439700 ' +
-    '+lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 ' +
-    '+units=m +nadgrids=@null +wktext +no_defs');
-  ol.proj.proj4.register(proj4);
-  const mercury_mercator = ol.proj.get('EPSG:999999');
+  // proj4.defs('EPSG:999999',
+  //   '+proj=merc +a=2439700 +b=2439700 ' +
+  //   '+lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 ' +
+  //   '+units=m +nadgrids=@null +wktext +no_defs');
+  // ol.proj.proj4.register(proj4);
+  // const mercury_mercator = ol.proj.get('EPSG:999999');
 
-  var vectorSource = new ol.source.Vector({
-    format: new ol.format.GeoJSON(),
-    url: function(extent) {
-      return 'http://localhost:8080/mercury/wfs?service=WFS&' +
-          'version=1.1.0&request=GetFeature&' +
-          'typename=mercury:H05_geological_units_3_classes-MERCATOR&' +
-          'outputFormat=application/json&srsname=EPSG:3857&' +
-          'bbox=' + extent.join(',');
-    },
-    strategy: ol.loadingstrategy.bbox,
-    crossOrigin: null
-  });
+  // var vectorSource = new ol.source.Vector({
+  //   format: new ol.format.GeoJSON(),
+  //   url: function(extent) {
+  //     return 'http://localhost:8080/mercury/wfs?service=WFS&' +
+  //         'version=1.1.0&request=GetFeature&' +
+  //         'typename=mercury:H05_geological_units_3_classes-MERCATOR&' +
+  //         'outputFormat=application/json&srsname=EPSG:3857&' +
+  //         'bbox=' + extent.join(',');
+  //   },
+  //   strategy: ol.loadingstrategy.bbox,
+  //   crossOrigin: null
+  // });
+  //
+  // var vector = new ol.layer.Vector({
+  //   source: vectorSource,
+  //   style: new ol.style.Style({
+  //     stroke: new ol.style.Stroke({
+  //       color: 'rgba(0, 0, 255, 1.0)',
+  //       width: 2
+  //     })
+  //   })
+  // });
 
-  var vector = new ol.layer.Vector({
-    source: vectorSource,
-    style: new ol.style.Style({
-      stroke: new ol.style.Stroke({
-        color: 'rgba(0, 0, 255, 1.0)',
-        width: 2
-      })
-    })
-  });
-
-  var wmsSource = new ol.source.ImageWMS({
-    url: 'http://localhost:8080/mercury/wms',
-    params: {'LAYERS': 'mercury:hokusai_450_mpx_Band1of8_255-MERCATOR'},
-    serverType: 'geoserver',
-    crossOrigin: null
-  });
-
-  var wmsLayer = new ol.layer.Image({
-    source: wmsSource
-  });
+  // var wmsSource = new ol.source.ImageWMS({
+  //   url: 'http://localhost:8080/mercury/wms',
+  //   params: {'LAYERS': 'mercury:hokusai_450_mpx_Band1of8_255-MERCATOR'},
+  //   serverType: 'geoserver',
+  //   crossOrigin: null
+  // });
+  //
+  // var wmsLayer = new ol.layer.Image({
+  //   source: wmsSource
+  // });
 
   var xyzSource = new ol.source.XYZ({
-    url: "http://localhost:8080/gwc/service/tms/1.0.0/mercury%3AMercury_MESSENGER_MDIS_Basemap_MD3Color_Mosaic_Global_665m-MERCATOR@EPSG%3A900913@jpeg/{z}/{x}/{-y}.jpg",
+    url: "http://localhost:8080/gwc/service/tms/1.0.0" +
+         "mercury%3Amercury_global_color_665m_EPSG4326@EPSG%3A4326@jpeg/{z}/{x}/{-y}.jpg",
   });
 
   var xyzLayer = new ol.layer.Tile({
