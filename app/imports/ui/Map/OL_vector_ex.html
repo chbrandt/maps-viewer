@@ -13,18 +13,69 @@
       height: 500px;
       width: 100%;
     }
+    .ol-toggle-options {
+      z-index: 1000;
+      background: rgba(255,255,255,0.4);
+      border-radius: 4px;
+      padding: 2px;
+      position: absolute;
+      left: 80px;
+      top: 80px;
+    }
+    .ol-toggle-options a {
+      background: rgba(0,60,136,0.5);
+      color: white;
+      display: block;
+      font-family: 'Lucida Grande',Verdana,Geneva,Lucida,Arial,Helvetica,sans-serif;
+      font-size: 19px;
+      font-weight: bold;
+      height: 22px;
+      line-height: 11px;
+      margin: 1px;
+      padding: 0;
+      text-align: center;
+      text-decoration: none;
+      width: 22px;
+      border-radius: 2px;
+    }
+    .ol-toggle-options a:hover {
+      color: #fff;
+      text-decoration: none;
+      background: rgba(0,60,136,0.7);
+    }
   </style>
 </head>
 <body>
   <h3>Mapbox Protobuf - vector tiles</h3>
-  <div id="map" class="map"></div>
+  <div id="map" class="map">
+    <div class="ol-toggle-options ol-unselectable">
+      <a title="Toggle layers selection" onClick="toggleControlPanel()" href="#layers">...</a>
+    </div>
+  </div>
   <div id="wrapper">
     <div id="location"></div>
   </div>
   <div id="nodelist">
     <em>Click on the map to get feature info</em>
   </div>
+  <div id="overlaysContainer"/>
   <script>
+
+  var scontrol = function() {
+    var button = document.createElement('button');
+    button.innerHTML = 'N';
+
+    var element = document.createElement('div');
+    element.className = 'rotate-north ol-unselectable ol-control';
+    element.appendChild(button);
+
+    ol.control.Control.call(this, {
+      element: element,
+      // target: options.target
+    });
+
+  };
+  ol.inherits(scontrol, ol.control.Control);
 
   var style_simple = new ol.style.Style({
     // fill: new ol.style.Fill({
@@ -121,7 +172,7 @@
       center: [0, 0],
       zoom: 2
     }),
-    controls: ol.control.defaults().extend([mousePositionControl]),
+    controls: ol.control.defaults().extend([mousePositionControl, new scontrol()]),
     // layers: [new ol.layer.VectorTile({
     //   style:simpleStyle,
     //   source: new ol.source.VectorTile({
@@ -283,6 +334,21 @@
     selectedFeatures.clear();
   });
 
+  var overlaysListContainer = document.getElementById('overlaysContainer');
+  var overlaysList = document.createElement('ul');
+  overlaysList.style = "list-style-type:none";
+  var overlaysListItem1 = document.createElement('li');
+  var overlaysListItem1ContentB = document.createElement('input');
+  overlaysListItem1ContentB.type = 'checkbox';
+  overlaysListItem1ContentB.checked = true;
+  overlaysListItem1ContentB.name = 'aname';
+  overlaysListItem1.appendChild(overlaysListItem1ContentB);
+  var overlaysListItem1ContentL = document.createElement('label');
+  overlaysListItem1ContentL.for = 'aname';
+  overlaysListItem1ContentL.innerText = 'A layer';
+  overlaysListItem1.appendChild(overlaysListItem1ContentL);
+  overlaysList.appendChild(overlaysListItem1);
+  overlaysListContainer.appendChild(overlaysList);
 
   // var xhr = new XMLHttpRequest();
   // xhr.open("POST", "http://localhost:8080/wfs", true);
