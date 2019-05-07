@@ -1,0 +1,48 @@
+<body>
+  <header>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+      <div class="col-xs-8 col-offset-xs-2 mx-auto">
+        <div class="btn-group" role="group">
+          {{#each bodies}}
+            {{> bodyMenuBtn}}
+          {{/each}}
+        </div>
+      </div>
+      <div class="col-xs-2 col-offset-xs-10">
+        {{> bodySearchBox}}
+      </div>
+    </nav>
+  </header>
+  <main class="container-fluid">
+    {{> mapContainer}}
+  </main>
+</body>
+
+
+<!-- Body selection buttons -->
+<template name="bodyMenuBtn">
+  <button type="button" class="body-selector btn btn-secondary text-capitalize"
+          value={{bodyName}}>
+    {{bodyName}}
+  </button>
+</template>
+
+
+<!-- Body location search-box  -->
+<template name="bodySearchBox">
+  <form id="body-search" class="form-inline my-2 my-lg-0">
+    <input class="body-searchInput form-control mr-sm-2"
+      type="search" placeholder="Search" aria-label="Search">
+    <button id="body-searchButton" class="btn btn-outline-success my-2 my-sm-0"
+      type="submit">
+      Search
+    </button>
+  </form>
+</template>
+
+
+<!-- Map -->
+<template name="mapContainer">
+  <div id='map-container' style="height:100%; width:100%"></div>
+  <div id='nodelist'></div>
+</template>

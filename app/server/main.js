@@ -1,31 +1,15 @@
-import { Meteor } from 'meteor/meteor';
-import Links from '/imports/api/links';
-
-function insertLink(title, url) {
-  Links.insert({ title, url, createdAt: new Date() });
-}
+import { Meteor } from "meteor/meteor";
+import { onPageLoad } from "meteor/server-render";
 
 Meteor.startup(() => {
-  // If the Links collection is empty, add some data.
-  if (Links.find().count() === 0) {
-    insertLink(
-      'Do the Tutorial',
-      'https://www.meteor.com/tutorials/react/creating-an-app'
-    );
+  // Code to run on server startup.
+  console.log(`Greetings from ${module.id}!`);
+});
 
-    insertLink(
-      'Follow the Guide',
-      'http://guide.meteor.com'
-    );
-
-    insertLink(
-      'Read the Docs',
-      'https://docs.meteor.com'
-    );
-
-    insertLink(
-      'Discussions',
-      'https://forums.meteor.com'
-    );
-  }
+onPageLoad(sink => {
+  // Code to run on every request.
+  sink.renderIntoElementById(
+    "server-render-target",
+    `Server time: ${new Date}`
+  );
 });

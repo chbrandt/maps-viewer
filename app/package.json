@@ -1,5 +1,5 @@
 {
-  "name": "storymapp",
+  "name": "app",
   "private": true,
   "scripts": {
     "start": "meteor run",
@@ -9,16 +9,12 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.3.4",
-    "leaflet": "^1.4.0",
     "meteor-node-stubs": "^0.4.1",
-    "ol": "^5.3.2",
-    "proj4": "^2.5.0",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "ol": "^5.3.2"
   },
   "meteor": {
     "mainModule": {
-      "client": "client/main.jsx",
+      "client": "client/main.js",
       "server": "server/main.js"
     },
     "testModule": "tests/main.js"

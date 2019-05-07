@@ -1,64 +1,33 @@
-import React from 'react';
-import { Session } from 'meteor/session';
-import { Tracker } from 'meteor/tracker';
+import { Template } from 'meteor/templating';
 
-// Load basemaps and overlays definitions
-import { baseMaps, overlayMaps } from '/imports/api/basemaps.js';
+import './body.html';
 
+Template.body.helpers({
+  bodies: [
+    { bodyName: "Mercury" }
+  ]
+})
 
-export default class Map extends React.Component {
-  constructor(props) {
-    super(props);
-
-    let bodiesList = Object.keys(baseMaps);
-    if (bodiesList.indexOf(this.props.body) == -1) {
-      throw "ValueError: was expecting 'props.body' to be among: " + JSON.stringify(bodiesList);
-    }
-
-    this.setMap = this.setMap.bind(this);
+Template.bodyMenuBtn.events({
+  'click' (event) {
+    event.preventDefault();
+    console.log(event);
   }
+})
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.body == this.props.body) {
-      return false;
-    }
-    return true;
+Template.bodySearchBox.events({
+  'keyup input' (event) {
+    event.preventDefault();
+    console.log(event);
+  },
+
+  'click button' (event) {
+    event.preventDefault();
+    console.log(event);
   }
+})
 
-  render() {
-    return (
-      <div>
-        <div id='map' style={{width:'100%', height:'100%'}}/>
-        <div id='nodelist'/>
-      </div>
-    )
-  }
-
-  componentDidMount() {
-    this.map = this.setMap(this.props.body);
-    // this.map.panTo([10,100]);
-
-    // Tracker.autorun(() => {
-    //   var latlng = Session.get('latlng');
-    //   var _ll = L.latLng(latlng[0],latlng[1]);
-    //   console.log("LatLng: " + JSON.stringify(latlng));
-    //   console.log(latlng);
-    //   // console.log(_ll);
-    //   // console.log(this.map.getCenter());
-    //   if (latlng) {
-    //     this.map.panTo(_ll);
-    //     // console.log(this.map.getCenter());
-    //   }
-    // });
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    this.map.setTarget(null);
-    this.map = null;
-    this.map = this.setMap(this.props.body);
-  }
-
-setMap(body) {
+Template.mapContainer.onRendered(() => {
   var style_simple = new ol.style.Style({
     stroke: new ol.style.Stroke({
       color: '#00AAFF',
@@ -126,7 +95,7 @@ setMap(body) {
   });
 
   var map = new ol.Map({
-    target: 'map',
+    target: document.getElementById('map-container'),
     view: new ol.View({
       projection: 'EPSG:4326',
       center: [0, 0],
@@ -180,12 +149,4 @@ setMap(body) {
     });
     this.setState({selectedFeatures: selectedFeatures});
   });
-
-  // clear selection when drawing a new box and when clicking on the map
-  // dragBox.on('boxstart', function() {
-  //   this.state.selectedFeatures.clear();
-  // });
-
-  return map;
-}
-}
+})
