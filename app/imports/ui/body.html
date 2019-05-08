@@ -1,4 +1,4 @@
-<body>
+<!-- <body>
   <header>
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
       <div class="col-xs-8 col-offset-xs-2 mx-auto">
@@ -16,20 +16,20 @@
   <main class="container-fluid">
     {{> mapContainer}}
   </main>
-</body>
+</body> -->
 
 
 <!-- Body selection buttons -->
-<template name="bodyMenuBtn">
+<!-- <template name="bodyMenuBtn">
   <button type="button" class="body-selector btn btn-secondary text-capitalize"
           value={{bodyName}}>
     {{bodyName}}
   </button>
-</template>
+</template> -->
 
 
 <!-- Body location search-box  -->
-<template name="bodySearchBox">
+<!-- <template name="bodySearchBox">
   <form id="body-search" class="form-inline my-2 my-lg-0">
     <input class="body-searchInput form-control mr-sm-2"
       type="search" placeholder="Search" aria-label="Search">
@@ -38,11 +38,155 @@
       Search
     </button>
   </form>
-</template>
+</template> -->
 
+
+<body>
+    <div class="wrapper">
+        {{> sidebar}}
+        <!-- Page Content  -->
+        <div id="content">
+            {{> menubar}}
+            {{> mapContainer}}
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+</body>
 
 <!-- Map -->
 <template name="mapContainer">
-  <div id='map-container' style="height:100%; width:100%"></div>
-  <div id='nodelist'></div>
+    <div id='map-container' style="height:500px; width:100%"></div>
+    <div id='nodelist' style="height:100px; width:100%; margin:2px 0; border-style:solid"></div>
+</template>
+
+<template name="menubar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <!-- <span>Toggle Sidebar</span> -->
+            </button>
+            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-align-justify"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Page</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</template>
+
+<!-- Sidebar  -->
+<template name="sidebar">
+    <nav id="sidebar">
+        <div class="sidebar-header">
+            <h3>Planmap</h3>
+            <strong>P</strong>
+        </div>
+        <ul class="list-unstyled components">
+
+            <li>
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <input type="checkbox" id="hokusai-3cc">
+                    <!-- <i class="fas fa-home"></i> -->
+                    Hokusai - 3cc
+                </a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <label>
+                            <input type="checkbox" id="hokusai-3cc-cat">
+                                Hokusai - Categorical
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" id="hokusai-3cc-surf">
+                                Hokusai - Surfaces
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" id="hokusai-3cc-cont">
+                                Hokusai - Contacts
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" id="hokusai-3cc-lines">
+                                Hokusai - Linear features
+                        </label>
+                    </li>
+                </ul>
+            </li>
+            <!-- <li>
+                <a href="#">
+                    <i class="fas fa-briefcase"></i>
+                    About
+                </a>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <i class="fas fa-copy"></i>
+                    Pages
+                </a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="#">Page 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 3</a>
+                    </li>
+                </ul>
+            </li> -->
+            <!-- <li>
+                <a href="#">
+                    <i class="fas fa-image"></i>
+                    Portfolio
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-question"></i>
+                    FAQ
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="fas fa-paper-plane"></i>
+                    Contact
+                </a>
+            </li> -->
+        </ul>
+
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+            </li>
+            <li>
+                <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+            </li>
+        </ul>
+    </nav>
 </template>
