@@ -73,6 +73,55 @@ class OLMap {
       style: style_simple
     });
 
+    var layers_hokusai_3 = new ol.layer.Group({
+      layers: [
+        raster_geounits_3,
+        vector_geounits_3,
+      ],
+    });
+    layers_hokusai_3.name = 'hokusai-3cc-cat';
+
+
+    var raster_geounits_5 = new ol.layer.Tile({
+      visible: true,
+      opacity: 0.5,
+      source: new ol.source.TileWMS({
+        url: 'http://localhost:8080/mercury/wms',
+        params: {'FORMAT': format,
+                 'VERSION': '1.1.1',
+                 tiled: true,
+              "LAYERS": 'mercury:H05_geological_units_5_classes_EPSG4326',
+              "exceptions": 'application/vnd.ogc.se_inimage',
+        }
+      })
+    });
+
+    var vector_geounits_5 = new ol.layer.Vector({
+      source: new ol.source.Vector({
+        format: new ol.format.GeoJSON(),
+        url: function(extent) {
+          return 'http://localhost:8080/wfs?' +
+              'service=WFS&version=1.1.0&request=GetFeature&' +
+              'typename=mercury:H05_geological_units_5_classes_EPSG4326&' +
+              'outputFormat=application/json&' +
+              'srsname=EPSG:4326&' +
+              'bbox=' + extent.join(',');
+        },
+        strategy: ol.loadingstrategy.bbox,
+        crossOrigin: null
+      }),
+      style: style_simple
+    });
+
+    var layers_hokusai_5 = new ol.layer.Group({
+      layers: [
+        raster_geounits_5,
+        vector_geounits_5,
+      ],
+    });
+    layers_hokusai_5.name = 'hokusai-5cc-cat';
+    layers_hokusai_5.setVisible(false);
+
     var vector_surfaces = new ol.layer.Vector({
       source: new ol.source.Vector({
         format: new ol.format.GeoJSON(),
@@ -90,6 +139,7 @@ class OLMap {
       // style: style_simple
     });
     vector_surfaces.name = 'hokusai-3cc-surf';
+    vector_surfaces.setVisible(false);
 
     var vector_lines = new ol.layer.Vector({
       source: new ol.source.Vector({
@@ -108,6 +158,7 @@ class OLMap {
       // style: style_simple
     });
     vector_lines.name = 'hokusai-3cc-lines';
+    vector_lines.setVisible(false);
 
     var vector_contacts = new ol.layer.Vector({
       source: new ol.source.Vector({
@@ -126,14 +177,7 @@ class OLMap {
       // style: style_simple
     });
     vector_contacts.name = 'hokusai-3cc-cont';
-
-    var layers_hokusai = new ol.layer.Group({
-      layers: [
-        raster_geounits_3,
-        vector_geounits_3,
-      ],
-    });
-    layers_hokusai.name = 'hokusai-3cc-cat';
+    vector_contacts.setVisible(false);
 
 
 
@@ -147,7 +191,8 @@ class OLMap {
       controls: ol.control.defaults().extend([mousePositionControl]),
       layers: [
         raster_global,
-        layers_hokusai,
+        layers_hokusai_3,
+        layers_hokusai_5,
         vector_surfaces,
         vector_lines,
         vector_contacts
