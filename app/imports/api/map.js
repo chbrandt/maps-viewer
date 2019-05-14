@@ -1,3 +1,8 @@
+import { Meteor } from 'meteor/meteor';
+
+var geoserver_url = Meteor.settings.public.geoserver.url;
+console.log('Geoserver-URL: ' + JSON.stringify(geoserver_url));
+
 class OLMap {
   constructor() {
     this._map = null;
@@ -37,7 +42,7 @@ class OLMap {
 
     var raster_global = new ol.layer.Tile({
       source: new ol.source.TileWMS({
-        url: 'http://localhost:8080/mercury/wms',
+        url: geoserver_url + '/mercury/wms',
         params: {LAYERS: 'mercury:mercury_global_MD3Color_665m_EPSG4326'}
       })
     });
@@ -46,7 +51,7 @@ class OLMap {
       visible: true,
       opacity: 0.5,
       source: new ol.source.TileWMS({
-        url: 'http://localhost:8080/mercury/wms',
+        url: geoserver_url + '/mercury/wms',
         params: {'FORMAT': format,
                  'VERSION': '1.1.1',
                  tiled: true,
@@ -60,7 +65,7 @@ class OLMap {
       source: new ol.source.Vector({
         format: new ol.format.GeoJSON(),
         url: function(extent) {
-          return 'http://localhost:8080/wfs?' +
+          return geoserver_url + '/wfs?' +
               'service=WFS&version=1.1.0&request=GetFeature&' +
               'typename=mercury:H05_geological_units_3_classes_EPSG4326&' +
               'outputFormat=application/json&' +
@@ -86,7 +91,7 @@ class OLMap {
       visible: true,
       opacity: 0.5,
       source: new ol.source.TileWMS({
-        url: 'http://localhost:8080/mercury/wms',
+        url: geoserver_url + '/mercury/wms',
         params: {'FORMAT': format,
                  'VERSION': '1.1.1',
                  tiled: true,
@@ -100,7 +105,7 @@ class OLMap {
       source: new ol.source.Vector({
         format: new ol.format.GeoJSON(),
         url: function(extent) {
-          return 'http://localhost:8080/wfs?' +
+          return geoserver_url + '/wfs?' +
               'service=WFS&version=1.1.0&request=GetFeature&' +
               'typename=mercury:H05_geological_units_5_classes_EPSG4326&' +
               'outputFormat=application/json&' +
@@ -126,7 +131,7 @@ class OLMap {
       source: new ol.source.Vector({
         format: new ol.format.GeoJSON(),
         url: function(extent) {
-          return 'http://localhost:8080/wfs?' +
+          return geoserver_url + '/wfs?' +
               'service=WFS&version=1.1.0&request=GetFeature&' +
               'typename=mercury:H05_surface_features_EPSG4326&' +
               'outputFormat=application/json&' +
@@ -145,7 +150,7 @@ class OLMap {
       source: new ol.source.Vector({
         format: new ol.format.GeoJSON(),
         url: function(extent) {
-          return 'http://localhost:8080/wfs?' +
+          return geoserver_url + '/wfs?' +
               'service=WFS&version=1.1.0&request=GetFeature&' +
               'typename=mercury:H05_linear_features_EPSG4326&' +
               'outputFormat=application/json&' +
@@ -164,7 +169,7 @@ class OLMap {
       source: new ol.source.Vector({
         format: new ol.format.GeoJSON(),
         url: function(extent) {
-          return 'http://localhost:8080/wfs?' +
+          return geoserver_url + '/wfs?' +
               'service=WFS&version=1.1.0&request=GetFeature&' +
               'typename=mercury:H05_contacts_EPSG4326&' +
               'outputFormat=application/json&' +
