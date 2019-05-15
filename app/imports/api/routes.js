@@ -1,4 +1,13 @@
+import { Router } from 'meteor/iron:router';
 // var fs = Npm.require('fs');
+
+Router.configure({
+ noRoutesTemplate: 'noRoutesTemplate',
+});
+
+// Router.route('/', function () {
+//   this.render('Home');
+// });
 
 Router.route('/download/', function () {
   // NodeJS request object

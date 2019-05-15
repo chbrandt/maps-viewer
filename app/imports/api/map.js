@@ -225,6 +225,44 @@ class OLMap {
       }
     });
 
+    var lonLabelStyle = new ol.style.Text({
+      font: '12px Calibri,sans-serif',
+      textBaseline: 'bottom',
+      fill: new ol.style.Fill({
+        color: 'rgba(0,0,0,1)'
+      }),
+      stroke: new ol.style.Stroke({
+        color: 'rgba(255,255,255,1)',
+        width: 3
+      })
+    });
+    var latLabelStyle = new ol.style.Text({
+      font: '12px Calibri,sans-serif',
+      textAlign: 'end',
+      fill: new ol.style.Fill({
+        color: 'rgba(0,0,0,1)'
+      }),
+      stroke: new ol.style.Stroke({
+        color: 'rgba(255,255,255,1)',
+        width: 3
+      })
+    });
+    // Create the graticule component
+    var graticule = new ol.Graticule({
+      // the style to use for the lines, optional.
+      strokeStyle: new ol.style.Stroke({
+        color: 'rgba(255,120,0,0.9)',
+        width: 1,
+        lineDash: [0.5, 4]
+      }),
+      latLabelFormatter: function(lat){ return lat; },
+      latLabelStyle: latLabelStyle,
+      lonLabelFormatter: function(lon){ return lon; },
+      lonLabelStyle: lonLabelStyle,
+      showLabels: true
+    });
+
+    graticule.setMap(map);
     // // a normal select interaction to handle click
     // var select = new ol.interaction.Select({style: style_selected});
     // map.addInteraction(select);

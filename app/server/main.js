@@ -1,7 +1,7 @@
 import { Meteor } from "meteor/meteor";
 import { onPageLoad } from "meteor/server-render";
 
-import '../imports/api/routes.js';
+// import '../imports/api/routes.js';
 
 Meteor.startup(() => {
   // Code to run on server startup.
