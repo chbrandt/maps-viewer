@@ -1,11 +1,35 @@
+import { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
+
+import { bodies } from '/imports/data/bodies.js';
+
 import { Map } from '/imports/api/map.js';
 
 import './sidebar.html';
 
 Template.bodiesSelector.events({
   'click .dropdown-item' (event, instance) {
-    console.log(event);
+    console.log(event.target.id);
+    Session.set('currentBody', event.target.id);
     instance.find('#dropdownMenuButton').innerHTML = event.target.innerHTML;
+  }
+})
+
+Template.sidebar.helpers({
+  currentBody: function() {
+    return Session.get('currentBody');
+  }
+})
+
+Template.mapMenu.helpers({
+  currentData: function() {
+    var currentBody = Session.get('currentBody');
+    for (body of bodies) {
+      if (body.name == currentBody) {
+        console.log(body.data);
+        return body.data;
+      }
+    }
   }
 })
 // Template.sidebar.helpers({
