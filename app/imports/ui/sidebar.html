@@ -3,25 +3,36 @@
 <template name="sidebar">
     <nav id="sidebar">
         <div class="sidebar-header">
-            <img src="https://planmap.eu/sites/default/files/planmap_logo_black_no-text%20-64_0.png"/>
+            <!-- <img src="https://planmap.eu/sites/default/files/planmap_logo_black_no-text%20-64_0.png"/> -->
+            <img src="/assets/images/logo_black_alpha.png"/>
             <h3>Planmap</h3>
-            <!-- <strong>P</strong> -->
         </div>
-        <ul class="list-unstyled components">
-            {{#each localMap}}
-                {{> mapMenu}}
-            {{/each}}
-        </ul>
-
-        <ul class="list-unstyled CTAs">
-            <li>
-                <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
-            </li>
-            <li>
-                <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
-            </li>
-        </ul>
+        <div class="sidebar-content">
+            {{> bodiesSelector}}
+                <ul class="list-unstyled components">
+                    {{#each localMap}}
+                        {{> mapMenu}}
+                    {{/each}}
+                </ul>
+        </div>
     </nav>
+</template>
+
+<template name="bodiesSelector">
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button"
+            id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Bodies
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            {{#each body in this}}
+                <button class="dropdown-item" type="button" id={{body.name}}>
+                    {{body.name}}
+                </button>
+            {{/each}}
+        </div>
+    </div>
 </template>
 
 <template name="mapMenu">

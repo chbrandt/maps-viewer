@@ -2,12 +2,8 @@
   <!-- <main class="container-fluid"> -->
     <div class="wrapper">
         {{#with bodies}}
-          {{{bodies.[0].name}}}
-          <!-- {{> sidebar}} -->
+          {{> sidebar}}
         {{/with}}
-        {{#each bodies}}
-          {{{name}}}
-        {{/each}}
         <div id="content">
             {{> menubar}}
             {{> mapContainer}}

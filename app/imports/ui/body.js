@@ -17,3 +17,9 @@ import { bodies } from '/imports/data/bodies.js';
 Template.body.helpers({
   bodies: bodies
 })
+
+Template.body.events({
+  'change' (event, instance) {
+    console.log(event);
+  }
+})

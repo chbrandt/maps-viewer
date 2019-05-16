@@ -2,45 +2,51 @@ import { Map } from '/imports/api/map.js';
 
 import './sidebar.html';
 
-Template.sidebar.helpers({
-  localMap: [
-    {
-      name: "Hokusai",
-      basemap: null,
-      layers: {
-        multiple: [
-          {
-            layerID: "hokusai-3cc-lines",
-            layerLabel: "Linear features"
-          },
-          {
-            layerID: "hokusai-3cc-cont",
-            layerLabel: "Contacts"
-          },
-          {
-            layerID: "hokusai-3cc-surf",
-            layerLabel: "Surfaces"
-          },
-        ],
-        exclusive: [
-          {
-            layerGroup: "geological-units",
-            selected: true,
-            layerID: "hokusai-3cc-cat",
-            layerLabel: "3 Categories",
-            packageID: "PM-MER-MS-H05_3cc_01"
-          },
-          {
-            layerGroup: "geological-units",
-            layerID: "hokusai-5cc-cat",
-            layerLabel: "5 Categories",
-            packageID: "PM-MER-MS-H05_5cc_01"
-          },
-        ]
-      }
-    }
-  ]
+Template.bodiesSelector.events({
+  'click .dropdown-item' (event, instance) {
+    console.log(event);
+    instance.find('#dropdownMenuButton').innerHTML = event.target.innerHTML;
+  }
 })
+// Template.sidebar.helpers({
+//   localMap: [
+//     {
+//       name: "Hokusai",
+//       basemap: null,
+//       layers: {
+//         multiple: [
+//           {
+//             layerID: "hokusai-3cc-lines",
+//             layerLabel: "Linear features"
+//           },
+//           {
+//             layerID: "hokusai-3cc-cont",
+//             layerLabel: "Contacts"
+//           },
+//           {
+//             layerID: "hokusai-3cc-surf",
+//             layerLabel: "Surfaces"
+//           },
+//         ],
+//         exclusive: [
+//           {
+//             layerGroup: "geological-units",
+//             selected: true,
+//             layerID: "hokusai-3cc-cat",
+//             layerLabel: "3 Categories",
+//             packageID: "PM-MER-MS-H05_3cc_01"
+//           },
+//           {
+//             layerGroup: "geological-units",
+//             layerID: "hokusai-5cc-cat",
+//             layerLabel: "5 Categories",
+//             packageID: "PM-MER-MS-H05_5cc_01"
+//           },
+//         ]
+//       }
+//     }
+//   ]
+// })
 
 
 Template.sidebar.events({
