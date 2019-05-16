@@ -1,7 +1,13 @@
 <body>
   <!-- <main class="container-fluid"> -->
     <div class="wrapper">
-        {{> sidebar}}
+        {{#with bodies}}
+          {{{bodies.[0].name}}}
+          <!-- {{> sidebar}} -->
+        {{/with}}
+        {{#each bodies}}
+          {{{name}}}
+        {{/each}}
         <div id="content">
             {{> menubar}}
             {{> mapContainer}}
@@ -17,6 +23,7 @@
         });
     </script>
 </body>
+
 
 <!-- <body>
   <header>
