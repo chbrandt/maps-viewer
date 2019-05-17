@@ -8,9 +8,11 @@
                 <!-- <span>Toggle Sidebar</span> -->
             </button>
 
-            <button type="button" class="btn btn-danger mx-auto" disabled id="testbutton">
-                {{testvariable}}
+        {{#if currentBody}}
+            <button type="button" class="btn btn-light mx-auto" disabled id="testbutton">
+                {{currentBody}}
             </button>
+        {{/if}}
 
             <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button"
                 data-toggle="collapse" data-target="#navbarSupportedContent"

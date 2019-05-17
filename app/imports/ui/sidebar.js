@@ -7,7 +7,7 @@ import { Map } from '/imports/api/map.js';
 
 import './sidebar.html';
 
-Template.bodiesSelector.events({
+Template.bodySelector.events({
   'click .dropdown-item' (event, instance) {
     console.log(event.target.id);
     Session.set('currentBody', event.target.id);
@@ -21,7 +21,7 @@ Template.sidebar.helpers({
   }
 })
 
-Template.mapMenu.helpers({
+Template.mapsMenu.helpers({
   currentData: function() {
     var currentBody = Session.get('currentBody');
     for (body of bodies) {
@@ -32,6 +32,11 @@ Template.mapMenu.helpers({
     }
   }
 })
+
+Template.layerSwitcher.onRendered(function() {
+  // this.$('input').click();
+})
+
 // Template.sidebar.helpers({
 //   localMap: [
 //     {

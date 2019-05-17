@@ -1,10 +1,21 @@
 
 <!-- Map -->
 <template name="mapContainer">
-    <div id='map-container' style="height:500px; width:100%"></div>
-    <div class="row">
-      <div class="justify-content-end"></div>
-      <div id="location"></div>
+    <div id='map-container' style="height:70%; width:100%">
+    {{#unless body}}
+
+        <!-- IF no body was yet selected, something to entertain the user -->
+        <div class="d-flex justify-content-center" style="height:100%">
+            <div class="spinner-border text-primary align-self-center" role="status">
+              <span class="sr-only">Select a body</span>
+            </div>
+        </div>
+
+    {{/unless}}
     </div>
-    <div id='nodelist' style="height:100px; width:100%; margin:2px 0; border-style:solid"></div>
+
+{{#if body}}
+    <div id="location">{{body}}</div>
+    <div id='nodelist' style="height:30%; width:100%; margin:2px 0; border-style:solid"></div>
+{{/if}}
 </template>

@@ -7,19 +7,20 @@
             <h3>Planmap</h3>
         </div>
         <div class="sidebar-content">
-            {{> bodiesSelector}}
+            {{> bodySelector}}
             {{#if currentBody}}
-                {{> mapMenu}}
+                {{> mapsMenu}}
             {{/if}}
         </div>
     </nav>
 </template>
 
-<template name="bodiesSelector">
+<!-- DROPDOWN MENU WITH BODIES TO SELECT -->
+<template name="bodySelector">
     <div class="row">
     <div class="dropdown mx-auto">
         <button
-          class="btn btn-secondary dropdown-toggle"
+          class="btn btn-primary"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
@@ -27,103 +28,107 @@
           aria-expanded="false">
             Select body
         </button>
-        <div
-          class="dropdown-menu"
+        <div class="dropdown-menu"
           aria-labelledby="dropdownMenuButton">
-            {{#each body in this}}
-                <button
-                  class="dropdown-item"
-                  type="button"
-                  id={{body.name}}>
-                    {{body.name}}
-                </button>
-            {{/each}}
+
+        {{#each body in this}}
+            <button
+              class="dropdown-item"
+              type="button"
+              id={{body.name}}>
+
+                {{body.name}}
+
+            </button>
+        {{/each}}
+
         </div>
     </div>
     </div>
 </template>
 
-<template name="mapMenu">
-    <ul class="list-unstyled components">
-    {{#each currentData.maps}}
 
+<!-- ACCORDION MENU WITH SELECTED BODY LAYERS -->
+<template name="mapsMenu">
+    <ul class="list-unstyled components">
+
+    {{#each currentData.maps}}
         <div class="accordion" id="accordionButtonsGroup">
             <div class="card">
                 <div class="card-header" id="heading{{name}}">
                     <h2 class="mb-0">
-                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#{{name}}" aria-expanded="false" aria-controls="{{name}}">
+                        <button class="btn btn-link" type="button"
+                            data-toggle="collapse"
+                            data-target="#{{name}}"
+                            aria-expanded="false"
+                            aria-controls="{{name}}">
+
                           {{name}}
+
                         </button>
                     </h2>
                 </div>
 
-                <div id="{{name}}" class="collapse {{#unless @index}}show{{/unless}}" aria-labelledby="heading{{name}}" data-parent="#accordionButtonsGroup">
+                <div id="{{name}}" class="collapse {{#unless @index}}show{{/unless}}"
+                    aria-labelledby="heading{{name}}"
+                    data-parent="#accordionButtonsGroup">
                     <div class="card-body">
+
+                    {{#if layers}}
                         <ul>
-                                <li>bla</li>
-                            {{#each layers.multiple}}
-                                <!-- {{> layerSelector}} -->
-                            {{/each}}
-                            <hr />
-                            {{#each layers.exclusive}}
-                                <!-- {{> layerSwitcher}} -->
-                            {{/each}}
+
+                        {{#each layers.multiple}}
+                            {{> layerSelector}}
+                        {{/each}}
+
+                        <hr />
+
+                        {{#each layers.exclusive}}
+                            {{#let index=@index}}
+                            {{> layerSwitcher}}
+                            {{/let}}
+                        {{/each}}
+
                         </ul>
+                    {{else}}
+                        <div class="alert alert-info" role="alert">
+                            No layers available.
+                        </div>
+                    {{/if}}
+
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <li >
-            <a href="#{{name}}"
-              data-toggle="collapse"
-              aria-expanded="false"
-              class="dropdown-toggle">
-                {{name}}
-            </a>
-            <div
-              class="btn-toolbar"
-              role="toolbar"
-              aria-label="Toolbar with button groups">
-                <div
-                  class="btn-group mr-2"
-                  role="group"
-                  aria-label="First group">
-                </div>
-            </div>
-            <ul class="collapse list-unstyled" id="{{name}}">
-                {{#each layers.multiple}}
-                    {{> layerSelector}}
-                {{/each}}
-                <hr />
-                {{#each layers.exclusive}}
-                    {{> layerSwitcher}}
-                {{/each}}
-            </ul>
-        </li> -->
     {{/each}}
+
     </ul>
 </template>
 
+
 <template name="layerSelector">
-    <div
-      class="form-check"
-      style="margin-left:10px">
-        <input type="checkbox" class="form-check-input" id={{layerID}}>
-        <label
-          class="form-check-label"
-          for={{layerID}}>
+    <div class="form-check" style="margin-left:10px">
+        <input id="{{layerID}}" type="checkbox" class="form-check-input">
+        <label for="{{layerID}}" class="form-check-label">
+
             {{layerLabel}}
+
         </label>
     </div>
 </template>
 
+
 <template name="layerSwitcher">
     <div class="form-check" style="margin-left:20px">
-        <input type="radio" class="form-check-input" id={{layerID}} name={{layerGroup}} checked={{selected}}>
-        <label class="form-check-label col-12" for={{layerID}}>
+        <input id="{{layerID}}" type="radio" class="form-check-input"
+            name="{{layerGroup}} {{#unless index}}checked{{/unless}}">
+        <label class="form-check-label col-12" for="{{layerID}}">
+
             {{layerLabel}}
-            <button type="button" class="btn btn-outline-secondary btn-sm float-right"
-                style="border:0" id={{packageID}}>
+
+            <button id="{{packagename}}" type="button"
+                class="btn btn-outline-secondary btn-sm float-right"
+                style="border:0">
                 <i class="fas fa-download"></i>
             </button>
         </label>

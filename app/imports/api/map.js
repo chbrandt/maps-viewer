@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 
+import { bodies } from '/imports/data/bodies.js';
+
 var geoserver_url = Meteor.settings.public.geoserver.url;
 console.log('Geoserver-URL: ' + JSON.stringify(geoserver_url));
 
@@ -12,8 +14,23 @@ class OLMap {
     return this._map;
   }
 
-  build_mercury() {
+  clean() {
+    this._map.setTarget(null);
+    this._map = null;
+  }
 
+  build(body) {
+    if (this._map) {
+      this.clean();
+    }
+    var map;
+    if (body.toLowerCase() == "mercury") {
+      map = this.build_mercury()
+    }
+    this._map = map
+  }
+
+  build_mercury() {
     var style_simple = new ol.style.Style({
       stroke: new ol.style.Stroke({
         color: '#00AAFF',
@@ -284,7 +301,7 @@ class OLMap {
     //   });
     // });
 
-    this._map = map;
+    return map;
   }
 }
 
