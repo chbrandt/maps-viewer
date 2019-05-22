@@ -1,4 +1,4 @@
-var mercury = {
+export var mercury = {
   maps: [
     {
       name: "Hokusai",
@@ -25,7 +25,7 @@ var mercury = {
         exclusive: [
           {
             // 'switchGroup' is used to connect the buttons
-            switchGroup: "geological-units",
+            layerGroup: "geological-units",
             selected: true,
             layerID: "hokusai-3cc-cat",
             layerLabel: "3 Categories",
@@ -33,7 +33,7 @@ var mercury = {
             packagename: "PM-MER-MS-H05_3cc_01"
           },
           {
-            switchGroup: "geological-units",
+            layerGroup: "geological-units",
             layerID: "hokusai-5cc-cat",
             layerLabel: "5 Categories",
             packagename: "PM-MER-MS-H05_5cc_01"
@@ -54,5 +54,3 @@ var mercury = {
     }
   ]
 }
-
-export { mercury };

@@ -53,6 +53,7 @@
     <ul class="list-unstyled components">
 
     {{#each currentData.maps}}
+
         <div class="accordion" id="accordionButtonsGroup">
             <div class="card">
                 <div class="card-header" id="heading{{name}}">
@@ -67,28 +68,44 @@
 
                         </button>
                     </h2>
+
+                    {{#if packageID}}
+                    <button id="{{packageID}}" type="button"
+                        class="btn btn-outline-secondary btn-sm float-right"
+                        style="border:0">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    {{/if}}
+
                 </div>
 
                 <div id="{{name}}" class="collapse {{#unless @index}}show{{/unless}}"
                     aria-labelledby="heading{{name}}"
                     data-parent="#accordionButtonsGroup">
+
                     <div class="card-body">
 
                     {{#if layers}}
                         <ul>
 
-                        {{#each layers.multiple}}
-                            {{> layerSelector}}
-                        {{/each}}
+                        {{#if layers.multiple }}
+                          {{#each layers.multiple}}
+                              {{> OLD_layerSelector}}
+                          {{/each}}
+                        {{else}}
+                          {{#if layers.vector }}
+                            {{#each layers.vector }}
+                              {{> layerSelector }}
+                            {{/each}}
+                          {{/if}}
+                        {{/if}}
 
+                        {{#if layers.exclusive }}
                         <hr />
-
                         {{#each layers.exclusive}}
-                            {{#let index=@index}}
-                            {{> layerSwitcher}}
-                            {{/let}}
+                            {{> OLD_layerSwitcher}}
                         {{/each}}
-
+                        {{/if }}
                         </ul>
                     {{else}}
                         <div class="alert alert-info" role="alert">
@@ -97,6 +114,7 @@
                     {{/if}}
 
                     </div>
+
                 </div>
             </div>
         </div>
@@ -117,11 +135,22 @@
     </div>
 </template>
 
+<template name="OLD_layerSelector">
+    <div class="form-check" style="margin-left:10px">
+        <input id="{{layerID}}" type="checkbox" class="form-check-input">
+        <label for="{{layerID}}" class="form-check-label">
 
-<template name="layerSwitcher">
+            {{layerLabel}}
+
+        </label>
+    </div>
+</template>
+
+
+<template name="OLD_layerSwitcher">
     <div class="form-check" style="margin-left:20px">
         <input id="{{layerID}}" type="radio" class="form-check-input"
-            name="{{layerGroup}} {{#unless index}}checked{{/unless}}">
+            name="{{layerGroup}}" checked="{{selected}}">
         <label class="form-check-label col-12" for="{{layerID}}">
 
             {{layerLabel}}

@@ -6,12 +6,6 @@ import './sidebar.js';
 import './menubar.js';
 import './map.js';
 
-// Template.body.helpers({
-//   bodies: [
-//     { bodyName: "Mercury" }
-//   ]
-// })
-
 import { bodies } from '/imports/data/bodies.js';
 
 Template.body.helpers({
@@ -19,7 +13,7 @@ Template.body.helpers({
 })
 
 Template.body.events({
-  'change' (event, instance) {
-    console.log(event);
-  }
+  // 'click' (event, instance) {
+  //   // console.log(event);
+  // }
 })

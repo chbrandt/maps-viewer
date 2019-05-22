@@ -33,8 +33,28 @@ Template.mapsMenu.helpers({
   }
 })
 
-Template.layerSwitcher.onRendered(function() {
-  // this.$('input').click();
+Template.mapsMenu.events({
+  'click button' (event, instance) {
+    var packageID = event.target.id;
+    var currentBody = Session.get("currentBody").toLowerCase();
+    var pmlink = "https://data.planmap.eu/pub/" + currentBody +'/'+ packageID;
+    window.open(pmlink, '_blank');
+  }
+})
+Template.layerSelector.events({
+  'click input' (event, instance) {
+    console.log(event);
+    var layerID = event.target.id;
+    var state = event.target.checked;
+    Map.setVisible(layerID, state);
+    // var map = Map.getMap();
+    // map.getLayers().forEach((layer,i) => {
+    // console.log(layer.name +':'+ event.target.id);
+    //   if (layer.name == event.target.id) {
+    //     layer.setVisible(event.target.checked);
+    //   }
+    // });
+  },
 })
 
 // Template.sidebar.helpers({
@@ -77,8 +97,7 @@ Template.layerSwitcher.onRendered(function() {
 //   ]
 // })
 
-
-Template.sidebar.events({
+Template.OLD_layerSwitcher.events({
   'click #PM-MER-MS-H05_3cc_01' (event, instance) {
     // function reqListener () {
     //   console.log(this.responseText);
@@ -92,16 +111,6 @@ Template.sidebar.events({
   },
   'click #PM-MER-MS-H05_5cc_01' (event, instance) {
     window.open("https://data.planmap.eu/pub/mercury/PM-MER-MS-H05_5cc_01", '_blank');
-  },
-  'change #hokusai-3cc' (event, instance) {
-    console.log(event);
-    var map = Map.getMap();
-    map.getLayers().forEach((layer,i) => {
-    console.log(layer.name +':'+ event.target.id);
-      if (layer instanceof(ol.layer.Group)) {
-        layer.setVisible(event.target.checked);
-      }
-    });
   },
   'click #hokusai-5cc-cat, click #hokusai-3cc-cat' (event, instance) {
     console.log(event);
@@ -117,17 +126,23 @@ Template.sidebar.events({
         layer.setVisible($('#hokusai-3cc-cat').is(':checked'));
       }
     });
+  }
+})
+
+Template.sidebar.events({
+  'change #hokusai-3cc' (event, instance) {
+    console.log(event);
+    var map = Map.getMap();
+    map.getLayers().forEach((layer,i) => {
+    console.log(layer.name +':'+ event.target.id);
+      if (layer instanceof(ol.layer.Group)) {
+        layer.setVisible(event.target.checked);
+      }
+    });
   },
-  // 'change #hokusai-5cc-cat' (event, instance) {
-  //   console.log(event);
-  //   var map = Map.getMap();
-  //   map.getLayers().forEach((layer,i) => {
-  //   console.log(layer.name +':'+ event.target.id);
-  //     if (layer.name == event.target.id) {
-  //       layer.setVisible(event.target.checked);
-  //     }
-  //   });
-  // },
+})
+
+Template.OLD_layerSelector.events({
   'change #hokusai-3cc-surf' (event, instance) {
     console.log(event);
     var map = Map.getMap();

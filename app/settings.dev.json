@@ -1,7 +1,7 @@
 {
   "public": {
     "geoserver": {
-      "url": "http://4174ca1e.ngrok.io"
+      "url": "https://geoserver.planmap.eu"
     }
   }
 }
