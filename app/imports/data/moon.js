@@ -1,7 +1,31 @@
 /*
+{
+  body: <string>, // name of the body we are handling
+  maps: [         // list of maps (planmap packages), raster + vector
+    {
+      label: <string>, // a label/name to the map (e.g, Apollo)
+      packageID: <string>, // (planmap) packageID (e.g, PM-MOO-MS-SPAApollo_01)
+      bbox: [4 * <float>], // [xmin, ymin, xmax, ymax]
+      layers: {            // set of vector and raster layers
+        vector: [           // list of vector layers
+          {
+            layerID: <string>,
+            layerLabel: <string>,
+            wfs: {
+              typename: <string>
+            }
+          }
+        ],
+        raster: [           // list of raster layers
+
+        ]
+      }
+    }
+  ]
+}
 */
 export var moon = {
-  name: "moon",
+  body: "moon",
   maps: [
     {
       name: "Apollo",

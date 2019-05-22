@@ -23,11 +23,11 @@ export function build () {
   });
 
   var mousePositionControl = new ol.control.MousePosition({
-          className: 'custom-mouse-position',
-          target: document.getElementById('location'),
-          coordinateFormat: ol.coordinate.createStringXY(5),
-          undefinedHTML: '&nbsp;'
-        });
+    className: 'custom-mouse-position',
+    target: document.getElementById('location'),
+    coordinateFormat: ol.coordinate.createStringXY(5),
+    undefinedHTML: '&nbsp;'
+  });
 
   var format = 'image/png';
 
@@ -182,7 +182,7 @@ export function build () {
     view: new ol.View({
       projection: 'EPSG:4326',
       center: [0, 0],
-      zoom: 2
+      zoom: 3
     }),
     controls: ol.control.defaults().extend([mousePositionControl]),
     layers: [

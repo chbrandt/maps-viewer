@@ -1,7 +1,7 @@
 
 <!-- Map -->
 <template name="mapContainer">
-    <div id='map-container' style="height:70%; width:100%">
+    <div id='map-container' style="height:70%; width:100%; z-index:0">
     {{#unless body}}
 
         <!-- IF no body was yet selected, something to entertain the user -->
@@ -12,10 +12,11 @@
         </div>
 
     {{/unless}}
+      <div id="location" style="z-index:9999"></div>
     </div>
 
 {{#if body}}
-    <div id="location">{{body}}</div>
-    <div id='nodelist' style="height:30%; width:100%; margin:2px 0; border-style:solid"></div>
+    <!-- <div id='nodelist' style="height:20%; width:100%; margin:2px 0; border-style:solid"></div> -->
+    <div id='nodelist' style="height:20%; width:100%; margin:2px 0"></div>
 {{/if}}
 </template>

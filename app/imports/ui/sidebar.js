@@ -33,14 +33,15 @@ Template.mapsMenu.helpers({
   }
 })
 
-Template.mapsMenu.events({
-  'click button' (event, instance) {
-    var packageID = event.target.id;
-    var currentBody = Session.get("currentBody").toLowerCase();
-    var pmlink = "https://data.planmap.eu/pub/" + currentBody +'/'+ packageID;
-    window.open(pmlink, '_blank');
-  }
-})
+// Template.mapsMenu.events({
+//   'click button' (event, instance) {
+//     var packageID = event.target.id;
+//     var currentBody = Session.get("currentBody").toLowerCase();
+//     var pmlink = "https://data.planmap.eu/pub/" + currentBody +'/'+ packageID;
+//     window.open(pmlink, '_blank');
+//   }
+// })
+
 Template.layerSelector.events({
   'click input' (event, instance) {
     console.log(event);
