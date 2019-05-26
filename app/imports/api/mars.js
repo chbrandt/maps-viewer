@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 var geoserver_url = Meteor.settings.public.geoserver.url;
 console.log('Geoserver-URL: ' + JSON.stringify(geoserver_url));
 
-export function build () {
+export function build (data) {
   var format = 'image/png';
 
   var workspace = 'mars';
@@ -27,209 +27,77 @@ export function build () {
     })
   });
 
-  var lonLabelStyle = new ol.style.Text({
-    font: '12px Calibri,sans-serif',
-    textBaseline: 'bottom',
-    fill: new ol.style.Fill({
-      color: 'rgba(0,0,0,1)'
-    }),
-    stroke: new ol.style.Stroke({
-      color: 'rgba(255,255,255,1)',
-      width: 3
-    })
-  });
-
-  var latLabelStyle = new ol.style.Text({
-    font: '12px Calibri,sans-serif',
-    textAlign: 'end',
-    fill: new ol.style.Fill({
-      color: 'rgba(0,0,0,1)'
-    }),
-    stroke: new ol.style.Stroke({
-      color: 'rgba(255,255,255,1)',
-      width: 3
-    })
-  });
   // --------------------------------------------------------------------------
 
-  var mousePositionControl = new ol.control.MousePosition({
-          className: 'custom-mouse-position',
-          target: document.getElementById('location'),
-          coordinateFormat: ol.coordinate.createStringXY(5),
-          undefinedHTML: '&nbsp;'
-        });
-
-
-  // --------------------------------------------------------------------------
   // GLOBAL MAP
+  var global_basemap = data.basemaps[0];
+
   var raster_global = new ol.layer.Tile({
     source: new ol.source.TileWMS({
-      url: geoserver_url + '/' + workspace + '/wms',
-      params: {LAYERS: 'mars:Mars_global_color_Viking.EPSG4326'}
+      // url: geoserver_url + '/' + workspace + '/wms',
+      url: geoserver_url + '/wms',
+      params: {LAYERS: global_basemap.typename}
+      // params: {LAYERS: 'mars:Mars_global_color_Viking.EPSG4326'}
     })
   });
   // --------------------------------------------------------------------------
 
-  // var raster_geounits_3 = new ol.layer.Tile({
-  //   visible: true,
-  //   opacity: 0.5,
-  //   source: new ol.source.TileWMS({
-  //     url: geoserver_url + '/mercury/wms',
-  //     params: {'FORMAT': format,
-  //              'VERSION': '1.1.1',
-  //              tiled: true,
-  //           "LAYERS": 'mercury:H05_geological_units_3_classes_EPSG4326',
-  //           "exceptions": 'application/vnd.ogc.se_inimage',
-  //     }
-  //   })
-  // });
-  //
-  // var vector_geounits_3 = new ol.layer.Vector({
-  //   source: new ol.source.Vector({
-  //     format: new ol.format.GeoJSON(),
-  //     url: function(extent) {
-  //       return geoserver_url + '/wfs?' +
-  //           'service=WFS&version=1.1.0&request=GetFeature&' +
-  //           'typename=mercury:H05_geological_units_3_classes_EPSG4326&' +
-  //           'outputFormat=application/json&' +
-  //           'srsname=EPSG:4326&' +
-  //           'bbox=' + extent.join(',');
-  //     },
-  //     strategy: ol.loadingstrategy.bbox,
-  //     crossOrigin: null
-  //   }),
-  //   style: style_simple
-  // });
-  //
-  // var layers_hokusai_3 = new ol.layer.Group({
-  //   layers: [
-  //     raster_geounits_3,
-  //     vector_geounits_3,
-  //   ],
-  // });
-  // layers_hokusai_3.name = 'hokusai-3cc-cat';
-  //
-  //
-  // var raster_geounits_5 = new ol.layer.Tile({
-  //   visible: true,
-  //   opacity: 0.5,
-  //   source: new ol.source.TileWMS({
-  //     url: geoserver_url + '/mercury/wms',
-  //     params: {'FORMAT': format,
-  //              'VERSION': '1.1.1',
-  //              tiled: true,
-  //           "LAYERS": 'mercury:H05_geological_units_5_classes_EPSG4326',
-  //           "exceptions": 'application/vnd.ogc.se_inimage',
-  //     }
-  //   })
-  // });
-  //
-  // var vector_geounits_5 = new ol.layer.Vector({
-  //   source: new ol.source.Vector({
-  //     format: new ol.format.GeoJSON(),
-  //     url: function(extent) {
-  //       return geoserver_url + '/wfs?' +
-  //           'service=WFS&version=1.1.0&request=GetFeature&' +
-  //           'typename=mercury:H05_geological_units_5_classes_EPSG4326&' +
-  //           'outputFormat=application/json&' +
-  //           'srsname=EPSG:4326&' +
-  //           'bbox=' + extent.join(',');
-  //     },
-  //     strategy: ol.loadingstrategy.bbox,
-  //     crossOrigin: null
-  //   }),
-  //   style: style_simple
-  // });
-  //
-  // var layers_hokusai_5 = new ol.layer.Group({
-  //   layers: [
-  //     raster_geounits_5,
-  //     vector_geounits_5,
-  //   ],
-  // });
-  // layers_hokusai_5.name = 'hokusai-5cc-cat';
-  // layers_hokusai_5.setVisible(false);
-  //
-  // var vector_surfaces = new ol.layer.Vector({
-  //   source: new ol.source.Vector({
-  //     format: new ol.format.GeoJSON(),
-  //     url: function(extent) {
-  //       return geoserver_url + '/wfs?' +
-  //           'service=WFS&version=1.1.0&request=GetFeature&' +
-  //           'typename=mercury:H05_surface_features_EPSG4326&' +
-  //           'outputFormat=application/json&' +
-  //           'srsname=EPSG:4326&' +
-  //           'bbox=' + extent.join(',');
-  //     },
-  //     strategy: ol.loadingstrategy.bbox,
-  //     crossOrigin: null
-  //   }),
-  //   // style: style_simple
-  // });
-  // vector_surfaces.name = 'hokusai-3cc-surf';
-  // vector_surfaces.setVisible(false);
-  //
-  // var vector_lines = new ol.layer.Vector({
-  //   source: new ol.source.Vector({
-  //     format: new ol.format.GeoJSON(),
-  //     url: function(extent) {
-  //       return geoserver_url + '/wfs?' +
-  //           'service=WFS&version=1.1.0&request=GetFeature&' +
-  //           'typename=mercury:H05_linear_features_EPSG4326&' +
-  //           'outputFormat=application/json&' +
-  //           'srsname=EPSG:4326&' +
-  //           'bbox=' + extent.join(',');
-  //     },
-  //     strategy: ol.loadingstrategy.bbox,
-  //     crossOrigin: null
-  //   }),
-  //   // style: style_simple
-  // });
-  // vector_lines.name = 'hokusai-3cc-lines';
-  // vector_lines.setVisible(false);
-  //
-  // var vector_contacts = new ol.layer.Vector({
-  //   source: new ol.source.Vector({
-  //     format: new ol.format.GeoJSON(),
-  //     url: function(extent) {
-  //       return geoserver_url + '/wfs?' +
-  //           'service=WFS&version=1.1.0&request=GetFeature&' +
-  //           'typename=mercury:H05_contacts_EPSG4326&' +
-  //           'outputFormat=application/json&' +
-  //           'srsname=EPSG:4326&' +
-  //           'bbox=' + extent.join(',');
-  //     },
-  //     strategy: ol.loadingstrategy.bbox,
-  //     crossOrigin: null
-  //   }),
-  //   // style: style_simple
-  // });
-  // vector_contacts.name = 'hokusai-3cc-cont';
-  // vector_contacts.setVisible(false);
 
-
-
-  var map = new ol.Map({
-    target: document.getElementById('map-container'),
-    view: new ol.View({
-      projection: 'EPSG:4326',
-      center: [0, 0],
-      zoom: 2
+  var vector = new ol.layer.Vector({
+    source: new ol.source.Vector({
+      format: new ol.format.GeoJSON(),
+      url: function(extent) {
+        return geoserver_url + '/wfs?' +
+            'service=WFS&version=1.1.0&request=GetFeature&' +
+            'typename=mars:PM-MAR-MS-Crommelin_01_Surrounding_terrains&' +
+            'outputFormat=application/json&' +
+            'srsname=EPSG:4326&' +
+            'bbox=' + extent.join(',');
+      },
+      strategy: ol.loadingstrategy.bbox,
+      crossOrigin: null
     }),
-    // controls: ol.control.defaults().extend([mousePositionControl]),
-    layers: [
-      raster_global,
-    ]
+    // style: style_simple
+  });
+  vector.setVisible(true);
+
+  var raster = new ol.layer.Tile({
+    visible: true,
+    opacity: 1,
+    source: new ol.source.TileWMS({
+      url: geoserver_url + '/wms',
+      params: {'FORMAT': format,
+               'VERSION': '1.1.1',
+               tiled: true,
+            "LAYERS": 'mars:PM-MAR-MS-Crommelin_01',
+            "exceptions": 'application/vnd.ogc.se_inimage',
+      }
+    })
   });
 
 
-
+  var legend_url = '/wms?REQUEST=GetLegendGraphic&service=WMS&version=1.1.1&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=mars:PM-MAR-MS-Crommelin_01&bbox=-11.42157996093972,3.6993348090528655,-10.859606114070235,4.150676173873131&srcwidth=574&srcheight=461&srs=EPSG:4326'
+  document.getElementById('legend').src = geoserver_url + legend_url;
+  // map.on('moveend', function(evt) {
+  //   console.log(evt);
+  //   var extent = evt.frameState.extent;
+  //   var srcwidth = evt.frameState.size[0];
+  //   var srcheight = evt.frameState.size[1];
+  //   // var legend_url = '/wms?REQUEST=GetLegendGraphic&VERSION=1.1.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=mars:PM-MAR-MS-Crommelin_01' +
+  //   // '&LEGEND_OPTIONS=grouplayout:horizontal;forceLabels:on' +
+  //   // '&bbox=' + extent.join(',') +
+  //   // '&srcwidth=' + srcwidth +
+  //   // '&srcheight=' + srcheight +
+  //   // '&srs=EPSG:4326';
+  //   var legend_url = '/wms?REQUEST=GetLegendGraphic&service=WMS&version=1.1.1&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=mars:PM-MAR-MS-Crommelin_01_Units_Secondary_Craters_Related&bbox=-11.42157996093972,3.6993348090528655,-10.859606114070235,4.150676173873131&srcwidth=574&srcheight=461&srs=EPSG:4326'
+  //   document.getElementById('legend').src = geoserver_url + legend_url;
+  // })
 
   // map.on('singleclick', function(evt) {
   //   document.getElementById('nodelist').innerHTML = "Loading... please wait...";
   //   var view = map.getView();
   //   var viewResolution = view.getResolution();
-  //   var source = raster_geounits_3.getSource();
+  //   var source = raster.getSource();
   //   var url = source.getGetFeatureInfoUrl(
   //     evt.coordinate, viewResolution, view.getProjection(),
   //     {'INFO_FORMAT': 'text/html', 'FEATURE_COUNT': 50});
@@ -243,22 +111,6 @@ export function build () {
   //   }
   // });
 
-  // Create the graticule component
-  var graticule = new ol.Graticule({
-    // the style to use for the lines, optional.
-    strokeStyle: new ol.style.Stroke({
-      color: 'rgba(255,120,0,0.9)',
-      width: 1,
-      lineDash: [0.5, 4]
-    }),
-    latLabelFormatter: function(lat){ return lat; },
-    latLabelStyle: latLabelStyle,
-    lonLabelFormatter: function(lon){ return lon; },
-    lonLabelStyle: lonLabelStyle,
-    showLabels: true
-  });
-
-  graticule.setMap(map);
   // // a normal select interaction to handle click
   // var select = new ol.interaction.Select({style: style_selected});
   // map.addInteraction(select);
@@ -280,5 +132,5 @@ export function build () {
   //   });
   // });
 
-  return map;
+  return [raster_global, raster, vector];
 }

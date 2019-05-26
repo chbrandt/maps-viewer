@@ -1,8 +1,8 @@
 
 <!-- Map -->
 <template name="mapContainer">
-    <div id='map-container' style="height:70%; width:100%; z-index:0">
-    {{#unless body}}
+    <div id='map-container' style="height:500px; width:100%">
+        {{#unless body}}
 
         <!-- IF no body was yet selected, something to entertain the user -->
         <div class="d-flex justify-content-center" style="height:100%">
@@ -11,9 +11,10 @@
             </div>
         </div>
 
-    {{/unless}}
-      <div id="location" style="z-index:9999"></div>
+        {{/unless}}
     </div>
+    <div id="location"></div>
+    <img id='legend'>
 
 {{#if body}}
     <!-- <div id='nodelist' style="height:20%; width:100%; margin:2px 0; border-style:solid"></div> -->
