@@ -55,7 +55,12 @@ class OLMap {
       map.getLayers().forEach((layer,i) => {
         console.log(layer);
         if (layer.name == layerID) {
-          layer.setVisible(state);
+          if (layer.role == 'main') {
+            layer.setVisible(state);
+          }
+          if (layer.role == 'marker') {
+            layer.setVisible(!state);
+          }
         }
       });
     }
@@ -78,6 +83,8 @@ function assembleMap(layers) {
 
   var graticule = setGraticule();
   graticule.setMap(map);
+
+  setPopup(map);
 
   return map;
 }
@@ -133,6 +140,44 @@ function setGraticule() {
   });
 
   return graticule;
+}
+
+function setPopup(map) {
+  var element = document.getElementById('popup');
+  console.log('setup popup');
+  console.log(element);
+  
+  var popup = new ol.Overlay({
+    element: element,
+    positioning: 'bottom-center',
+    stopEvent: false,
+    offset: [0, -50]
+  });
+  map.addOverlay(popup);
+
+  // display popup on click
+  map.on('click', function(evt) {
+    var feature = map.forEachFeatureAtPixel(evt.pixel,
+      function(feature) {
+        return feature;
+      });
+      console.log(feature);
+    if (feature) {
+      var coordinates = feature.getGeometry().getCoordinates();
+      popup.setPosition(coordinates);
+      $(element).popover({
+        placement: 'top',
+        html: true,
+        content: feature.get('name')
+      });
+      $(element).popover('show');
+      console.log('show');
+    } else {
+      $(element).popover('destroy');
+      console.log('destroy');
+    }
+    console.log(element);
+  });
 }
 
 var Map = new OLMap();

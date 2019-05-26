@@ -7,6 +7,9 @@ import { Map } from '/imports/api/map.js';
 
 import './sidebar.html';
 
+var dataserver_url = Meteor.settings.public.dataserver.url;
+console.log('DataServer-URL: ' + JSON.stringify(dataserver_url));
+
 Template.bodySelector.events({
   'click .dropdown-item' (event, instance) {
     console.log(event.target.id);
@@ -33,14 +36,51 @@ Template.mapsMenu.helpers({
   }
 })
 
-// Template.mapsMenu.events({
-//   'click button' (event, instance) {
-//     var packageID = event.target.id;
-//     var currentBody = Session.get("currentBody").toLowerCase();
-//     var pmlink = "https://data.planmap.eu/pub/" + currentBody +'/'+ packageID;
-//     window.open(pmlink, '_blank');
-//   }
-// })
+Template.toggleLayer.events({
+  'click input' (event, instance) {
+    console.log(event);
+    var layer = instance.data.pm_id;
+    var state = event.target.checked;
+    Map.setVisible(layer, state);
+  }
+})
+
+Template.downloadPackage.events({
+  'click button' (event, instance) {
+    console.log(event);
+    var body = Session.get('currentBody').toLowerCase();
+    var pkgid = this.pm_id;
+    var url = [dataserver_url, body, pkgid].join('/');
+    window.open(url, '_blank');
+  }
+})
+
+Template.gotoData.events({
+  'click button' (event, instance) {
+    console.log(event);
+    var body = Session.get('currentBody').toLowerCase();
+    var pkgid = this.pm_id;
+    var url = [dataserver_url, body, pkgid].join('/');
+    window.open(url, '_blank');
+  }
+})
+
+Template.getNotebook.events({
+  'click button' (event, instance) {
+    console.log(event);
+    var body = Session.get('currentBody').toLowerCase();
+    var pkgid = this.pm_id;
+    var url = [dataserver_url, body, pkgid].join('/');
+    window.open(url, '_blank');
+  }
+})
+
+Template.readInfo.events({
+  'click' (event, instance) {
+    console.log(event);
+    console.log(instance);
+  }
+})
 
 Template.layerSelector.events({
   'click input' (event, instance) {

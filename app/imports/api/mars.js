@@ -30,7 +30,7 @@ export function build (data) {
   // --------------------------------------------------------------------------
 
   // GLOBAL MAP
-  var global_basemap = data.basemaps[0];
+  var global_basemap = data.basemap;
 
   var raster_global = new ol.layer.Tile({
     source: new ol.source.TileWMS({
@@ -43,38 +43,65 @@ export function build (data) {
   // --------------------------------------------------------------------------
 
 
-  var vector = new ol.layer.Vector({
-    source: new ol.source.Vector({
-      format: new ol.format.GeoJSON(),
-      url: function(extent) {
-        return geoserver_url + '/wfs?' +
-            'service=WFS&version=1.1.0&request=GetFeature&' +
-            'typename=mars:PM-MAR-MS-Crommelin_01_Surrounding_terrains&' +
-            'outputFormat=application/json&' +
-            'srsname=EPSG:4326&' +
-            'bbox=' + extent.join(',');
-      },
-      strategy: ol.loadingstrategy.bbox,
-      crossOrigin: null
-    }),
-    // style: style_simple
-  });
-  vector.setVisible(true);
+  // var vector = new ol.layer.Vector({
+  //   source: new ol.source.Vector({
+  //     format: new ol.format.GeoJSON(),
+  //     url: function(extent) {
+  //       return geoserver_url + '/wfs?' +
+  //           'service=WFS&version=1.1.0&request=GetFeature&' +
+  //           'typename=mars:PM-MAR-MS-Crommelin_01_Surrounding_terrains&' +
+  //           'outputFormat=application/json&' +
+  //           'srsname=EPSG:4326&' +
+  //           'bbox=' + extent.join(',');
+  //     },
+  //     strategy: ol.loadingstrategy.bbox,
+  //     crossOrigin: null
+  //   }),
+  //   // style: style_simple
+  // });
+  // vector.setVisible(false);
+  // vector.name = 'PM-MAR-MS-Crommelin_01';
 
-  var raster = new ol.layer.Tile({
-    visible: true,
-    opacity: 1,
-    source: new ol.source.TileWMS({
-      url: geoserver_url + '/wms',
-      params: {'FORMAT': format,
-               'VERSION': '1.1.1',
-               tiled: true,
-            "LAYERS": 'mars:PM-MAR-MS-Crommelin_01',
-            "exceptions": 'application/vnd.ogc.se_inimage',
-      }
-    })
-  });
+  var layers = [];
+  for (var map_ of data.maps) {
 
+    var marker = new ol.layer.Vector({
+      source: new ol.source.Vector({
+        features: [
+          new ol.Feature({
+            geometry: new ol.geom.Point([map_.center.lon, map_.center.lat]),
+            name: 'Null Island',
+            population: 4000,
+            rainfall: 500
+          })
+        ]
+      })
+    });
+    marker.setVisible(true);
+    marker.name = map_.pm_id;
+    marker.role = 'marker';
+    layers.push(marker);
+
+    var geounits = map_.layers.main;
+    var raster = new ol.layer.Tile({
+      visible: true,
+      opacity: 1,
+      source: new ol.source.TileWMS({
+        url: geoserver_url + '/wms',
+        params: {'FORMAT': format,
+                 'VERSION': '1.1.1',
+                 tiled: true,
+                 "LAYERS": geounits.typename,
+              "exceptions": 'application/vnd.ogc.se_inimage',
+        }
+      })
+    });
+    raster.setVisible(false);
+    raster.name = map_.pm_id;
+    raster.role = 'main';
+    layers.push(raster);
+  }
+  console.log(layers);
 
   var legend_url = '/wms?REQUEST=GetLegendGraphic&service=WMS&version=1.1.1&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=mars:PM-MAR-MS-Crommelin_01&bbox=-11.42157996093972,3.6993348090528655,-10.859606114070235,4.150676173873131&srcwidth=574&srcheight=461&srs=EPSG:4326'
   document.getElementById('legend').src = geoserver_url + legend_url;
@@ -132,5 +159,6 @@ export function build (data) {
   //   });
   // });
 
-  return [raster_global, raster, vector];
+  layers.unshift(raster_global);
+  return layers;
 }

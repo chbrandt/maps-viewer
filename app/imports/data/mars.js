@@ -1,16 +1,18 @@
 export var mars = {
-  basemaps: [
-    {
+  basemap: {
       typename: 'mars:Mars_global_color_Viking.EPSG4326',
     },
+  maps: [
     {
-      typename: 'mars:MARS_GLOBAL_DEM_463m',
-    },
-  ],
-  overlays: [
-    {
-      packageID: 'PM-MAR-MS-Crommelin_01',
-      typename: 'mars:PM-MAR-MS-Crommelin_01'
-    },
+      name: 'Crommelin',
+      pm_id: 'PM-MAR-MS-Crommelin_01',
+      center: {lat:5.1, lon:-10.2},
+      layers: {
+        main: {
+          wms: true,
+          typename: 'mars:PM-MAR-MS-Crommelin_01'
+        }
+      }
+    }
   ]
 };
