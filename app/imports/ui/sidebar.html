@@ -111,7 +111,8 @@
     <div class="input-group">
         <!-- <div class="input-group-prepend"> -->
             <div class="input-group-text">
-                <input type="checkbox" aria-label="Checkbox for package">
+                <input type="checkbox" checked="{{isChecked}}" aria-label="Checkbox for package">
+                <!-- {{pm_id}} -->
             </div>
         <!-- </div> -->
         <!-- <input type="text" class="form-control" aria-label="Text input with checkbox"> -->
@@ -127,7 +128,7 @@
 </template>
 
 <template name="downloadPackage">
-    <button id="download" type="button"
+    <button type="button"
         class="btn btn-outline-secondary btn-sm float-right"
         style="border:0">
         <i class="fas fa-download"></i>
@@ -135,7 +136,7 @@
 </template>
 
 <template name="gotoData">
-    <button id="data" type="button"
+    <button type="button"
         class="btn btn-outline-secondary btn-sm float-right"
         style="border:0">
         <i class="fas fa-folder-open"></i>
@@ -143,7 +144,7 @@
 </template>
 
 <template name="getNotebook">
-    <button id="jupyter" type="button"
+    <button type="button"
         class="btn btn-outline-secondary btn-sm float-right"
         style="border:0"
         >
@@ -156,7 +157,7 @@
 </template>
 
 <template name="readInfo">
-    <button id="info" type="button"
+    <button type="button"
       class="btn btn-outline-secondary btn-sm float-right"
       style="border:0"
       >
@@ -165,45 +166,4 @@
         <i class="fas fa-wifi"></i>
          -->
     </button>
-</template>
-
-
-
-
-<template name="layerSelector">
-    <div class="form-check" style="margin-left:10px">
-        <input id="{{layerID}}" type="checkbox" class="form-check-input">
-        <label for="{{layerID}}" class="form-check-label">
-            {{layerLabel}}
-        </label>
-    </div>
-</template>
-
-<template name="OLD_layerSelector">
-    <div class="form-check" style="margin-left:10px">
-        <input id="{{layerID}}" type="checkbox" class="form-check-input">
-        <label for="{{layerID}}" class="form-check-label">
-
-            {{layerLabel}}
-
-        </label>
-    </div>
-</template>
-
-
-<template name="OLD_layerSwitcher">
-    <div class="form-check" style="margin-left:20px">
-        <input id="{{layerID}}" type="radio" class="form-check-input"
-            name="{{layerGroup}}" checked="{{selected}}">
-        <label class="form-check-label col-12" for="{{layerID}}">
-
-            {{layerLabel}}
-
-            <button id="{{packagename}}" type="button"
-                class="btn btn-outline-secondary btn-sm float-right"
-                style="border:0">
-                <i class="fas fa-download"></i>
-            </button>
-        </label>
-    </div>
 </template>
