@@ -59,21 +59,23 @@
         <div class="accordion" id="accordionButtonsGroup">
 
             <div class="card">
-                <div class="card-header" id="heading{{map.name}}">
+
+                <div class="card-header" id="heading{{map.pm_id}}">
                     <h2 class="mb-0">
                         <button class="btn btn-link" type="button"
                           data-toggle="collapse"
-                          data-target="#{{map.name}}"
+                          data-target="#{{map.pm_id}}"
                           aria-expanded="false"
-                          aria-controls="{{map.name}}"
+                          aria-controls="{{map.pm_id}}"
                           >
                             {{map.name}}
                         </button>
                     </h2>
                 </div>
-                <div id="{{map.name}}"
-                  class="collapse {{#unless @index}}show{{/unless}}"
-                  aria-labelledby="heading{{map.name}}"
+
+                <div id="{{map.pm_id}}"
+                  class="collapse"
+                  aria-labelledby="heading{{map.pm_id}}"
                   data-parent="#accordionButtonsGroup"
                   >
                     <div class="card-body">
