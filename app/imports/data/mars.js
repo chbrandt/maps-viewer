@@ -13,6 +13,17 @@ export var mars = {
           typename: 'mars:PM-MAR-MS-Crommelin_01'
         }
       }
+    },
+    {
+      name: 'Arsinoes',
+      pm_id: 'PM-MAR-MS-Arsinoes_01',
+      center: {lat:-7.7, lon:-27.9},
+      layers: {
+        main: {
+          wms: true,
+          typename: 'mars:PM-MAR-MS-Arsinoes_01'
+        }
+      }
     }
   ]
 };
