@@ -24,6 +24,7 @@ class OLMap {
   }
 
   build(body) {
+    console.log("Building map of " + body)
     if (this._map) {
       this.clean();
     }
@@ -35,14 +36,15 @@ class OLMap {
         data = obj.data;
       }
     }
+    console.log("Data set found: " + JSON.stringify(data));
     if (body.toLowerCase() == "mercury") {
-      map = build_mercury();
+      layers = build_mercury(data);
     }
     else if (body.toLowerCase() == "mars") {
       layers = build_mars(data);
     }
     else if (body.toLowerCase() == "moon") {
-      map = build_moon();
+      layers = build_moon(data);
     }
 
     this._map = assembleMap(layers);
@@ -146,7 +148,7 @@ function setPopup(map) {
   var element = document.getElementById('popup');
   console.log('setup popup');
   console.log(element);
-  
+
   var popup = new ol.Overlay({
     element: element,
     positioning: 'bottom-center',
