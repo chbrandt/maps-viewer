@@ -61,11 +61,6 @@ export function build (data) {
   }
   console.log(layers);
 
-  var legend_url = '/wms?REQUEST=GetLegendGraphic&service=WMS&version=1.1.1' +
-                    '&FORMAT=image/png&WIDTH=20&HEIGHT=20' +
-                    '&LAYER=moon:PM-MOO-MS-SPAApollo_01';
-  document.getElementById('legend').src = geoserver_url + legend_url;
-
   layers.unshift(raster_global);
   return layers;
 }

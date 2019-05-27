@@ -63,9 +63,21 @@ class OLMap {
           if (layer.role == 'marker') {
             layer.setVisible(!state);
           }
+          setLegend(layerID, state, layer.values_.source.params_)
         }
       });
     }
+  }
+}
+
+function setLegend(layerID, turnON, params_) {
+  if (params_) {
+    var legend_url = '/wms?REQUEST=GetLegendGraphic&service=WMS&version=1.1.1' +
+                      '&FORMAT=image/png&WIDTH=20&HEIGHT=20' +
+                      '&LAYER=' + params_.LAYERS;
+    document.getElementById('legend').src = geoserver_url + legend_url;
+  } else {
+    document.getElementById('legend').src = null;
   }
 }
 

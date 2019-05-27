@@ -103,8 +103,8 @@ export function build (data) {
   }
   console.log(layers);
 
-  var legend_url = '/wms?REQUEST=GetLegendGraphic&service=WMS&version=1.1.1&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=mars:PM-MAR-MS-Crommelin_01&bbox=-11.42157996093972,3.6993348090528655,-10.859606114070235,4.150676173873131&srcwidth=574&srcheight=461&srs=EPSG:4326'
-  document.getElementById('legend').src = geoserver_url + legend_url;
+  // var legend_url = '/wms?REQUEST=GetLegendGraphic&service=WMS&version=1.1.1&FORMAT=image/png&WIDTH=20&HEIGHT=20&LAYER=mars:PM-MAR-MS-Crommelin_01&bbox=-11.42157996093972,3.6993348090528655,-10.859606114070235,4.150676173873131&srcwidth=574&srcheight=461&srs=EPSG:4326'
+  // document.getElementById('legend').src = geoserver_url + legend_url;
   // map.on('moveend', function(evt) {
   //   console.log(evt);
   //   var extent = evt.frameState.extent;

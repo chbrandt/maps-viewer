@@ -61,10 +61,10 @@ export function build (data) {
   }
   console.log(layers);
 
-  var legend_url = '/wms?REQUEST=GetLegendGraphic&service=WMS&version=1.1.1' +
-                    '&FORMAT=image/png&WIDTH=20&HEIGHT=20' +
-                    '&LAYER=mercury:PM-MER-MS-H05_3cc_01';
-  document.getElementById('legend').src = geoserver_url + legend_url;
+  // var legend_url = '/wms?REQUEST=GetLegendGraphic&service=WMS&version=1.1.1' +
+  //                   '&FORMAT=image/png&WIDTH=20&HEIGHT=20' +
+  //                   '&LAYER=mercury:PM-MER-MS-H05_3cc_01';
+  // document.getElementById('legend').src = geoserver_url + legend_url;
 
   layers.unshift(raster_global);
   return layers;
