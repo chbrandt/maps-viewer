@@ -24,6 +24,17 @@ export var mercury = {
           typename: 'mercury:PM-MER-MS-H05_5cc_01'
         }
       }
+    },
+    {
+      name: 'Rembrandt',
+      pm_id: 'PM-MER-MS-Rembrandt_01',
+      center: {lat:-33.2, lon:88.2},
+      layers: {
+        main: {
+          wms: true,
+          typename: 'mercury:PM-MER-MS-Rembrandt_01'
+        }
+      }
     }
   ]
 };
