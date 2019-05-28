@@ -14,5 +14,16 @@ export var moon = {
         }
       }
     },
+    {
+      name: 'Copernicus',
+      pm_id: 'PM-MOO-MS-Copernicus_01',
+      center: {lat:9.62, lon:-20.08},
+      layers: {
+        main: {
+          wms: true,
+          typename: 'moon:PM-MOO-MS-Copernicus_01'
+        }
+      }
+    },
   ]
 };
