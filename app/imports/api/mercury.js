@@ -23,23 +23,6 @@ export function build (data) {
   var layers = [];
   for (var map_ of data.maps) {
 
-    var marker = new ol.layer.Vector({
-      source: new ol.source.Vector({
-        features: [
-          new ol.Feature({
-            geometry: new ol.geom.Point([map_.center.lon, map_.center.lat]),
-            name: 'Null Island',
-            population: 4000,
-            rainfall: 500
-          })
-        ]
-      })
-    });
-    marker.setVisible(true);
-    marker.name = map_.pm_id;
-    marker.role = 'marker';
-    layers.push(marker);
-
     var geounits = map_.layers.main;
     var raster = new ol.layer.Tile({
       visible: true,
@@ -57,7 +40,24 @@ export function build (data) {
     raster.setVisible(false);
     raster.name = map_.pm_id;
     raster.role = 'main';
-    layers.push(raster);
+    layers.unshift(raster);
+
+    var marker = new ol.layer.Vector({
+      source: new ol.source.Vector({
+        features: [
+          new ol.Feature({
+            geometry: new ol.geom.Point([map_.center.lon, map_.center.lat]),
+            name: 'Null Island',
+            population: 4000,
+            rainfall: 500
+          })
+        ]
+      })
+    });
+    marker.setVisible(true);
+    marker.name = map_.pm_id;
+    marker.role = 'marker';
+    layers.unshift(marker);
   }
   console.log(layers);
 
