@@ -5,6 +5,9 @@
     },
     "dataserver": {
       "url": "https://data.planmap.eu/pub/"
+    },
+    "notebooks": {
+      "url": "https://github.com/planmap-eu/planmap-notebooks-code"
     }
   }
 }

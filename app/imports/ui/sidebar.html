@@ -92,7 +92,7 @@
                           role="toolbar" aria-label="Toolbar with button groups">
                             {{#with map}}
                             {{> toggleLayer}}
-                            {{> downloadPackage}}
+                            <!-- {{> downloadPackage}} -->
                             {{> gotoData}}
                             {{> getNotebook}}
                             {{> readInfo}}
@@ -109,22 +109,11 @@
 
 <template name="toggleLayer">
     <div class="input-group">
-        <!-- <div class="input-group-prepend"> -->
-            <div class="input-group-text">
-                <input type="checkbox" checked="{{isChecked}}" aria-label="Checkbox for package">
-                <!-- {{pm_id}} -->
-            </div>
-        <!-- </div> -->
-        <!-- <input type="text" class="form-control" aria-label="Text input with checkbox"> -->
+        <div class="input-group-text">
+            <input type="checkbox" checked="{{isChecked}}" aria-label="Checkbox for package">
+            <!-- {{pm_id}} -->
+        </div>
     </div>
-      <!-- <div class="btn-group-toggle" data-toggle="buttons">
-        <button id="visible"
-          class="btn btn-outline-secondary btn-sm float-right"
-          style="border:0">
-            <input type="checkbox" autocomplete="off">
-            <i class="fas fa-eye"></i>
-        </button>
-    </div> -->
 </template>
 
 <template name="downloadPackage">
