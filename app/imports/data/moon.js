@@ -1,6 +1,6 @@
 export var moon = {
   basemap: {
-      typename: 'moon:moon_global_color_lola_bluesteel.EPSG4326'
+      typename: 'moon:USGS_moon_global_wac.EPSG4326'
     },
   maps: [
     {

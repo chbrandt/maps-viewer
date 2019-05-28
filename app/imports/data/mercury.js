@@ -1,6 +1,6 @@
 export var mercury = {
   basemap: {
-      typename: 'mercury:mercury_global_MD3Color_665m_EPSG4326'
+      typename: 'mercury:USGS_Mercury_MESSENGER_MDIS_Basemap_LOI_Mosaic_Global_166m.EPSG4326_small.tif'
     },
   maps: [
     {

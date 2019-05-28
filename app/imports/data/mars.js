@@ -1,6 +1,6 @@
 export var mars = {
   basemap: {
-      typename: 'mars:Mars_global_color_Viking.EPSG4326',
+      typename: 'USGS_mars_global_shade.EPSG4326',
     },
   maps: [
     {
