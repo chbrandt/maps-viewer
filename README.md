@@ -1,4 +1,4 @@
-# Planmap-App
+# Planmap - Client
 
 The Planmap app is an web interface to explore (_e.g._, morphological) maps
 of Mercury, Mars and the Moon.
