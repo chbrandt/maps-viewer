@@ -17,14 +17,14 @@ The code is built using the Meteor/BlazeJS framework and Bootstrap.
 Support projects:
 <div>
 <a href='https://openlayers.org/'>
-  <img width='80px' src='docs/assets/logo_openlayers.png' />
+  <img width='50px' src='docs/assets/logo_openlayers.png' />
 </a>
 <img width='10px' src='docs/assets/slider-transparent-placeholder.png' />
 <a href='https://www.meteor.com/'>
-  <img width='80px' src='docs/assets/logo_meteor.png' />
+  <img width='50px' src='docs/assets/logo_meteor.png' />
 </a>
 <img width='10px' src='docs/assets/slider-transparent-placeholder.png' />
 <a href='https://getbootstrap.com/'>
-  <img width='80px' src='docs/assets/logo_bootstrap.png' />
+  <img width='50px' src='docs/assets/logo_bootstrap.png' />
 </a>
 </div>
