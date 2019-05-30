@@ -6,11 +6,16 @@ import { Map } from '/imports/api/map.js';
 import './sidebar.html';
 
 
-var dataserver_url = Meteor.settings.public.dataserver.url;
-console.log('DataServer-URL: ' + JSON.stringify(dataserver_url));
+var dataserverpub_url = Meteor.settings.public.dataserver.pub;
+console.log('DataServer-PUB: ' + JSON.stringify(dataserverpub_url));
+var dataserverzip_url = Meteor.settings.public.dataserver.zip;
+console.log('DataServer-ZIP: ' + JSON.stringify(dataserverzip_url));
 var notebooks_url = Meteor.settings.public.notebooks.url;
 console.log('Notebooks-URL: ' + JSON.stringify(notebooks_url));
+var geoserver_url = Meteor.settings.public.geoserver.url;
+console.log('Geoserver-URL: ' + JSON.stringify(geoserver_url));
 
+var baseurl_wms = 'wms?service=WMS&version=1.1.0&request=GetMap';
 
 Template.bodySelector.events({
   'click .dropdown-item' (event, instance) {
@@ -70,7 +75,7 @@ Template.downloadPackage.events({
     console.log(event);
     var body = Session.get('currentBody').toLowerCase();
     var pkgid = this.pm_id;
-    var url = [dataserver_url, body, pkgid].join('/');
+    var url = [dataserverzip_url, body, pkgid].join('/') + '.zip';
     window.open(url, '_blank');
   }
 })
@@ -81,7 +86,7 @@ Template.gotoData.events({
     console.log(event);
     var body = Session.get('currentBody').toLowerCase();
     var pkgid = this.pm_id;
-    var url = [dataserver_url, body, pkgid].join('/');
+    var url = [dataserverpub_url, body, pkgid].join('/');
     window.open(url, '_blank');
   }
 })
@@ -100,5 +105,25 @@ Template.readInfo.events({
   'click' (event, instance) {
     console.log(event);
     console.log(instance);
+    var body = Session.get('currentBody').toLowerCase();
+    var baseurl = geoserver_url +'/'+ body +'/'+ baseurl_wms;
+    var layers = this.pm_id;
+    var bbox = [this.bbox.xmin,
+                this.bbox.ymin,
+                this.bbox.xmax,
+                this.bbox.ymax].join(',');
+    var srs = this.bbox.srs;
+    var ratio = (this.bbox.ymax-this.bbox.ymin)/(this.bbox.xmax-this.bbox.xmin);
+    var width = 500;
+    var height = Math.round(width * ratio);
+    var format = 'image/png';
+    var url = [baseurl,
+                'layers='+layers,
+                'bbox='+bbox,
+                'srs='+srs,
+                'height='+height,
+                'width='+width,
+                'format='+format].join('&');
+    console.log(url);
   }
 })
