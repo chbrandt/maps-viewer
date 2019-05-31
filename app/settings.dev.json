@@ -4,10 +4,14 @@
       "url": "https://geoserver.planmap.eu"
     },
     "dataserver": {
-      "url": "https://data.planmap.eu/pub/"
+      "pub": "https://data.planmap.eu/pub",
+      "zip": "https://data.planmap.eu/zip"
     },
     "notebooks": {
-      "url": "https://github.com/planmap-eu/planmap-notebooks-code"
+      "url": "https://github.com/planmap-eu/planmap-notebooks-code/blob/master/data_access/Accessing_Planmap_data_OWS.ipynb"
+    },
+    "wms": {
+      "base": "wms?service=WMS&version=1.1.0&request=GetMap"
     }
   }
 }
