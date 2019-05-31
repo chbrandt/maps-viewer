@@ -47,6 +47,18 @@ Template.mapsMenu.helpers({
         return body.data;
       }
     }
+  },
+  currentBody: function() {
+    return Session.get('currentBody');
+  }
+})
+
+
+Template.menuAccordion.events({
+  'click #cardHeader' (event, instance) {
+    console.log(event);
+    console.log(instance);
+    Map.goto(instance.data.map.pm_id);
   }
 })
 

@@ -54,58 +54,60 @@
 <!-- ACCORDION MENU WITH SELECTED BODY LAYERS -->
 <template name="mapsMenu">
     <ul class="list-unstyled components">
-
         {{#each map in currentData.maps}}
-        <div class="accordion" id="accordionButtonsGroup">
-
-            <div class="card">
-
-                <div class="card-header" id="heading{{map.pm_id}}">
-                    <h2 class="mb-0">
-                        <button class="btn btn-link" type="button"
-                          data-toggle="collapse"
-                          data-target="#{{map.pm_id}}"
-                          aria-expanded="false"
-                          aria-controls="{{map.pm_id}}"
-                          >
-                            {{map.name}}
-                        </button>
-                    </h2>
-                </div>
-
-                <div id="{{map.pm_id}}"
-                  class="collapse"
-                  aria-labelledby="heading{{map.pm_id}}"
-                  data-parent="#accordionButtonsGroup"
-                  >
-                    <div class="card-body">
-                        <p class="card-title">
-                            {{map.pm_id}}
-                        </p>
-                        <!-- We need here a set of buttons:
-                        - (check) visualize the map
-                        - (button) download the package
-                        - (button) go to package data in file server
-                        - (button) open modal with geoserver endpoints
-                        - (button) link to nbviewer -->
-                        <div class="btn-toolbar justify-content-center"
-                          role="toolbar" aria-label="Toolbar with button groups">
-                            {{#with map}}
-                            {{> toggleLayer}}
-                            {{> downloadPackage}}
-                            {{> gotoData}}
-                            {{> getNotebook}}
-                            {{> readInfo}}
-                            {{/with}}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{> menuAccordion map=map body=currentBody}}
         {{/each}}
     </ul>
 </template>
 
+<template name="menuAccordion">
+  <div class="accordion" id="accordionButtonsGroup">
+
+      <div class="card">
+
+          <div class="card-header" id="heading{{map.pm_id}}">
+              <h2 class="mb-0">
+                  <button id="cardHeader" class="btn btn-link" type="button"
+                    data-toggle="collapse"
+                    data-target="#{{map.pm_id}}"
+                    aria-expanded="false"
+                    aria-controls="{{map.pm_id}}"
+                    >
+                      {{map.name}}
+                  </button>
+              </h2>
+          </div>
+
+          <div id="{{map.pm_id}}"
+            class="collapse"
+            aria-labelledby="heading{{map.pm_id}}"
+            data-parent="#accordionButtonsGroup"
+            >
+              <div class="card-body">
+                  <p class="card-title">
+                      {{map.pm_id}}
+                  </p>
+                  <!-- We need here a set of buttons:
+                  - (check) visualize the map
+                  - (button) download the package
+                  - (button) go to package data in file server
+                  - (button) open modal with geoserver endpoints
+                  - (button) link to nbviewer -->
+                  <div class="btn-toolbar justify-content-center"
+                    role="toolbar" aria-label="Toolbar with button groups">
+                      {{#with map}}
+                      {{> toggleLayer}}
+                      {{> downloadPackage}}
+                      {{> gotoData}}
+                      {{> getNotebook}}
+                      {{> readInfo}}
+                      {{/with}}
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</template>
 
 <template name="toggleLayer">
     <div class="input-group">

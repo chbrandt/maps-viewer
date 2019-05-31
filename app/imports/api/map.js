@@ -12,6 +12,7 @@ console.log('Geoserver-URL: ' + JSON.stringify(geoserver_url));
 class OLMap {
   constructor() {
     this._map = null;
+    this._data = null;
   }
 
   getMap() {
@@ -21,6 +22,7 @@ class OLMap {
   clean() {
     this._map.setTarget(null);
     this._map = null;
+    this._data = null;
   }
 
   build(body) {
@@ -36,6 +38,7 @@ class OLMap {
         data = obj.data;
       }
     }
+    this._data = data;
     console.log("Data set found: " + JSON.stringify(data));
     if (body.toLowerCase() == "mercury") {
       layers = build_mercury(data);
@@ -64,6 +67,29 @@ class OLMap {
             layer.setVisible(!state);
           }
           setLegend(layerID, state, layer.values_.source.params_)
+        }
+      });
+    }
+  }
+
+  goto(layerID) {
+    console.log(layerID);
+    var map = this._map;
+    if (map) {
+      this._data.maps.forEach((layer,i) => {
+        console.log(layer);
+        if (layer.pm_id == layerID) {
+          console.log(layer);
+          var view = map.getView();
+          var extent = [layer.bbox.xmin,layer.bbox.ymin,layer.bbox.xmax,layer.bbox.ymax];
+          // view.fit(extent);
+          var resolution = view.getResolutionForExtent(extent);
+          var location = [layer.center.lon, layer.center.lat];
+          map.getView().animate({
+            center: location,
+            resolution: resolution,
+            duration: 1000
+          });
         }
       });
     }
