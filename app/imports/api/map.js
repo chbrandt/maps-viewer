@@ -81,12 +81,17 @@ class OLMap {
         if (layer.pm_id == layerID) {
           console.log(layer);
           var view = map.getView();
-          var extent = [layer.bbox.xmin,layer.bbox.ymin,layer.bbox.xmax,layer.bbox.ymax];
+          var xmin = layer.bbox.xmin;
+          var ymin = layer.bbox.ymin;
+          var xmax = layer.bbox.xmax;
+          var ymax = layer.bbox.ymax;
+          var extent = [xmin,ymin,xmax,ymax];
+          var center = [(xmax+xmin)/2,(ymax+ymin)/2]
           // view.fit(extent);
           var resolution = view.getResolutionForExtent(extent);
-          var location = [layer.center.lon, layer.center.lat];
+          // var location = [layer.center.lon, layer.center.lat];
           map.getView().animate({
-            center: location,
+            center: center,
             resolution: resolution,
             duration: 1000
           });
