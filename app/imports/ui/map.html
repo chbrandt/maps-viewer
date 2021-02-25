@@ -1,24 +1,25 @@
 
 <!-- Map -->
 <template name="mapContainer">
-    <div id='map-container' style="height:500px; width:100%">
+    <div id='map-container' style="height:90%; width:100%; border:1px solid lightgray">
       <div id="popup"></div>
         {{#unless body}}
-
         <!-- IF no body was yet selected, something to entertain the user -->
         <div class="d-flex justify-content-center" style="height:100%">
-            <div class="spinner-border text-primary align-self-center" role="status">
-              <span class="sr-only">Select a body</span>
+          <div class="text-primary align-self-center" role="status">
+            <!-- <h3>Select a planet</h3> -->
+            <div class="spinner-border" role="status">
+              Oo.
             </div>
+          </div>
         </div>
-
         {{/unless}}
     </div>
     <div id="location"></div>
-    <img id='legend'>
+    <!-- <img id='legend'> -->
 
 {{#if body}}
     <!-- <div id='nodelist' style="height:20%; width:100%; margin:2px 0; border-style:solid"></div> -->
-    <div id='nodelist' style="height:20%; width:100%; margin:2px 0"></div>
+    <div id='nodelist' style="height:10%; width:100%; margin:2px 0"></div>
 {{/if}}
 </template>

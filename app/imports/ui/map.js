@@ -4,22 +4,14 @@ import './map.html';
 
 Template.mapContainer.onCreated(() => {
   console.log("mapContainer created");
-  // Map.build_mercury();
-  // var map = Map.build_bla();
-  // Session.set('map', map);
 })
 
 Template.mapContainer.onRendered(() => {
   console.log("mapContainer rendered");
-  // Map.build_mercury();
-  // Session.set('map', map);
 })
 
 Template.mapContainer.onDestroyed(() => {
   console.log("mapContainer destroyed");
-  // Map.build_mercury();
-  // var map = Map.build_bla();
-  // Session.set('map', map);
 })
 
 Template.mapContainer.helpers({
