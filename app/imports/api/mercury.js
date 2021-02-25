@@ -23,24 +23,65 @@ export function build (data) {
   var layers = [];
   for (var map_ of data.maps) {
 
-    var geounits = map_.layers.main;
-    var raster = new ol.layer.Tile({
-      visible: true,
-      opacity: 1,
-      source: new ol.source.TileWMS({
-        url: geoserver_url + '/wms',
-        params: {'FORMAT': format,
-                 'VERSION': '1.1.1',
-                 tiled: true,
-                 "LAYERS": geounits.typename,
-              "exceptions": 'application/vnd.ogc.se_inimage',
-        }
-      })
-    });
-    raster.setVisible(false);
-    raster.name = map_.pm_id;
-    raster.role = 'main';
-    layers.unshift(raster);
+    if (map_.layers) {
+      var geounits = map_.layers.main;
+      var raster = new ol.layer.Tile({
+        visible: true,
+        opacity: 1,
+        source: new ol.source.TileWMS({
+          url: geoserver_url + '/wms',
+          params: {'FORMAT': format,
+                   'VERSION': '1.1.1',
+                   tiled: true,
+                   "LAYERS": geounits.typename,
+                "exceptions": 'application/vnd.ogc.se_inimage',
+          }
+        })
+      });
+      raster.setVisible(false);
+      raster.name = map_.pm_id;
+      raster.role = 'main';
+      layers.unshift(raster);
+    } else {
+      var pol = new ol.Feature({
+                  geometry: new ol.geom.Polygon.fromExtent([map_.bbox.xmin, map_.bbox.ymin,
+                                                            map_.bbox.xmax, map_.bbox.ymax]),
+                  name: map_.pm_id
+                })
+      pol.set('description', map_.pm_id);
+      pol.setStyle(function() {
+        return [
+          new ol.style.Style({
+              fill: new ol.style.Fill({
+              color: 'rgba(255,255,255,0.4)'
+            }),
+            stroke: new ol.style.Stroke({
+              color: '#3399CC',
+              width: 1
+            }),
+            text: new ol.style.Text({
+              font: '16px Calibri,sans-serif',
+              fill: new ol.style.Fill({ color: '#000' }),
+              stroke: new ol.style.Stroke({
+                color: '#fff', width: 1.5
+              }),
+              text: map_.pm_id
+            })
+          })
+        ];
+      });
+      var bbox = new ol.layer.Vector({
+        source: new ol.source.Vector({
+          features: [
+            pol
+          ]
+        })
+      });
+      bbox.setVisible(false);
+      bbox.name = map_.pm_id;
+      bbox.role = 'main';
+      layers.unshift(bbox);
+    }
 
     var marker = new ol.layer.Vector({
       source: new ol.source.Vector({
@@ -60,11 +101,6 @@ export function build (data) {
     layers.unshift(marker);
   }
   console.log(layers);
-
-  // var legend_url = '/wms?REQUEST=GetLegendGraphic&service=WMS&version=1.1.1' +
-  //                   '&FORMAT=image/png&WIDTH=20&HEIGHT=20' +
-  //                   '&LAYER=mercury:PM-MER-MS-H05_3cc_01';
-  // document.getElementById('legend').src = geoserver_url + legend_url;
 
   layers.unshift(raster_global);
   return layers;

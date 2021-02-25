@@ -102,6 +102,7 @@ class OLMap {
 }
 
 function setLegend(layerID, turnON, params_) {
+  return;
   if (params_) {
     var legend_url = '/wms?REQUEST=GetLegendGraphic&service=WMS&version=1.1.1' +
                       '&FORMAT=image/png&WIDTH=20&HEIGHT=20' +
