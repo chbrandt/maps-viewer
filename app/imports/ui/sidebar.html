@@ -7,13 +7,10 @@
             <h3>Planmap</h3>
         </div>
         <div class="sidebar-content">
-
             {{> bodySelector}}
-
             {{#if currentBody}}
-            {{> mapsMenu}}
+              {{> mapsMenu}}
             {{/if}}
-
         </div>
     </nav>
 </template>
@@ -21,32 +18,31 @@
 <!-- DROPDOWN MENU WITH BODIES TO SELECT -->
 <template name="bodySelector">
     <div class="row">
-    <div class="dropdown mx-auto">
+      <div class="dropdown mx-auto">
         <button
-          class="btn btn-primary"
+          class="btn btn-primary dropdown-toggle"
           type="button"
           id="dropdownMenuButton"
           data-toggle="dropdown"
           aria-haspopup="true"
-          aria-expanded="false">
+          aria-expanded="false"
+          >
             Select body
         </button>
-        <div class="dropdown-menu"
-          aria-labelledby="dropdownMenuButton">
-
-            {{#each body in this}}
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <!-- <span class="dropdown-item-text">Non selectable item text</span> -->
+          <!-- <h6 class="dropdown-header">Dropdown header</h6> -->
+          {{#each body in this}}
             <button
               class="dropdown-item"
               type="button"
-              id={{body.name}}>
-
+              id={{body.name}}
+              >
                 {{body.name}}
-
             </button>
-            {{/each}}
-
+          {{/each}}
         </div>
-    </div>
+      </div>
     </div>
 </template>
 
@@ -54,9 +50,9 @@
 <!-- ACCORDION MENU WITH SELECTED BODY LAYERS -->
 <template name="mapsMenu">
     <ul class="list-unstyled components">
-        {{#each map in currentData.maps}}
+      {{#each map in currentData.maps}}
         {{> menuAccordion map=map body=currentBody}}
-        {{/each}}
+      {{/each}}
     </ul>
 </template>
 

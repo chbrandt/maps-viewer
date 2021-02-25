@@ -25,10 +25,10 @@ Template.bodySelector.events({
   }
 })
 
-Template.bodySelector.onRendered(function() {
-  // Triggers the first planet of the list
-  $('.dropdown-item:first').click();
-})
+// Template.bodySelector.onRendered(function() {
+//   // Triggers the first planet of the list
+//   $('.dropdown-item:first').click();
+// })
 
 
 Template.sidebar.helpers({
