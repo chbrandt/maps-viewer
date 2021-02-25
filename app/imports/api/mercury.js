@@ -5,24 +5,18 @@ console.log('Geoserver-URL: ' + JSON.stringify(geoserver_url));
 
 export function build (data) {
   console.log(data);
-
   var format = 'image/png';
-
   var workspace = 'mercury';
-
   // GLOBAL MAP
   var global_basemap = data.basemap;
-
   var raster_global = new ol.layer.Tile({
     source: new ol.source.TileWMS({
       url: geoserver_url + '/wms',
       params: {LAYERS: global_basemap.typename}
     })
   });
-
   var layers = [];
   for (var map_ of data.maps) {
-
     if (map_.layers) {
       var geounits = map_.layers.main;
       var raster = new ol.layer.Tile({
@@ -57,13 +51,13 @@ export function build (data) {
             }),
             stroke: new ol.style.Stroke({
               color: '#3399CC',
-              width: 1
+              width: 1.2
             }),
             text: new ol.style.Text({
-              font: '16px Calibri,sans-serif',
+              font: '12px Calibri,sans-serif',
               fill: new ol.style.Fill({ color: '#000' }),
               stroke: new ol.style.Stroke({
-                color: '#fff', width: 1.5
+                color: '#fff', width: 2
               }),
               text: map_.pm_id
             })
@@ -82,7 +76,6 @@ export function build (data) {
       bbox.role = 'main';
       layers.unshift(bbox);
     }
-
     var marker = new ol.layer.Vector({
       source: new ol.source.Vector({
         features: [
@@ -101,7 +94,6 @@ export function build (data) {
     layers.unshift(marker);
   }
   console.log(layers);
-
   layers.unshift(raster_global);
   return layers;
 }
