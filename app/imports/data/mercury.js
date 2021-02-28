@@ -116,6 +116,156 @@ export var mercury = {
         "ymax": 21.010239286240775,
         "srs": "EPSG:4326"
       }
+    },
+    {
+      "name": "C-Beethoven",
+      "pm_id": "PM-MER-C-Beethoven",
+      "center": {
+        "lon": -125.25,
+        "lat": -21.35
+      },
+      "bbox": {
+        "xmin": -132.3,
+        "xmax": -118.19999999999999,
+        "ymin": -27.7,
+        "ymax": -15.0,
+        "srs": "EPSG:4326"
+      }
+    },
+    {
+      "name": "C-H05_SU",
+      "pm_id": "PM-MER-C-H05_SU",
+      "center": {
+        "lon": 45.0,
+        "lat": 43.75
+      },
+      "bbox": {
+        "xmin": 0.0,
+        "xmax": 90.0,
+        "ymin": 22.5,
+        "ymax": 65.0,
+        "srs": "EPSG:4326"
+      }
+    },
+    {
+      "name": "C-Rembrandt",
+      "pm_id": "PM-MER-C-Rembrandt",
+      "center": {
+        "lon": 87.5,
+        "lat": -33.0
+      },
+      "bbox": {
+        "xmin": 75.0,
+        "xmax": 100.0,
+        "ymin": -41.0,
+        "ymax": -25.0,
+        "srs": "EPSG:4326"
+      }
+    },
+    {
+      "name": "D-Rembrandt",
+      "pm_id": "PM-MER-D-Rembrandt",
+      "center": {
+        "lon": 87.875,
+        "lat": -30.85
+      },
+      "bbox": {
+        "xmin": 65.75,
+        "xmax": 110.0,
+        "ymin": -51.7,
+        "ymax": -10.0,
+        "srs": "EPSG:4326"
+      }
+    },
+    {
+      "name": "MS-Beethoven",
+      "pm_id": "PM-MER-MS-Beethoven",
+      "center": {
+        "lon": -70.0,
+        "lat": -17.5
+      },
+      "bbox": {
+        "xmin": -140.0,
+        "xmax": 0.0,
+        "ymin": -35.0,
+        "ymax": 0.0,
+        "srs": "EPSG:4326"
+      }
+    },
+    {
+      "name": "MS-H10_3cc",
+      "pm_id": "PM-MER-MS-H10_3cc",
+      "center": {
+        "lon": 35.99897912818639,
+        "lat": -0.0020669677150522148
+      },
+      "bbox": {
+        "xmin": -0.003906250396028099,
+        "xmax": 72.00186450676881,
+        "ymin": -22.504180134697325,
+        "ymax": 22.50004619926722,
+        "srs": "EPSG:4326"
+      }
+    },
+    {
+      "name": "MS-H10_5cc",
+      "pm_id": "PM-MER-MS-H10_5cc",
+      "center": {
+        "lon": 35.99897912818639,
+        "lat": -0.0020669677150522148
+      },
+      "bbox": {
+        "xmin": -0.003906250396028099,
+        "xmax": 72.00186450676881,
+        "ymin": -22.504180134697325,
+        "ymax": 22.50004619926722,
+        "srs": "EPSG:4326"
+      }
+    },
+    {
+      "name": "MS-H14_3cc",
+      "pm_id": "PM-MER-MS-H14_3cc",
+      "center": {
+        "lon": 45.00045050131392,
+        "lat": -36.63941120082429
+      },
+      "bbox": {
+        "xmin": -62.393829766072486,
+        "xmax": 152.39473076870033,
+        "ymin": -80.25669145451333,
+        "ymax": 6.977869052864745,
+        "srs": "EPSG:4326"
+      }
+    },
+    {
+      "name": "MS-H14_5cc",
+      "pm_id": "PM-MER-MS-H14_5cc",
+      "center": {
+        "lon": 45.00045050131392,
+        "lat": -36.63941120082429
+      },
+      "bbox": {
+        "xmin": -62.393829766072486,
+        "xmax": 152.39473076870033,
+        "ymin": -80.25669145451333,
+        "ymax": 6.977869052864745,
+        "srs": "EPSG:4326"
+      }
+    },
+    {
+      "name": "SI-Rembrandt",
+      "pm_id": "PM-MER-SI-Rembrandt",
+      "center": {
+        "lon": 87.875,
+        "lat": -30.85
+      },
+      "bbox": {
+        "xmin": 65.75,
+        "xmax": 110.0,
+        "ymin": -51.7,
+        "ymax": -10.0,
+        "srs": "EPSG:4326"
+      }
     }
   ]
 };

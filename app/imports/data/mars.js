@@ -68,6 +68,66 @@ export var mars = {
         "ymax": 10.166423320849209,
         "srs": "EPSG:4326"
       }
+    },
+    {
+      "name": "D-Crommelin",
+      "pm_id": "PM-MAR-D-Crommelin",
+      "center": {
+        "lon": -10.082045000000022,
+        "lat": 5.09877
+      },
+      "bbox": {
+        "xmin": -11.152300000000025,
+        "xmax": -9.011790000000019,
+        "ymin": 3.96993,
+        "ymax": 6.22761,
+        "srs": "EPSG:4326"
+      }
+    },
+    {
+      "name": "D-Gale_Kimberley",
+      "pm_id": "PM-MAR-D-Gale_Kimberley",
+      "center": {
+        "lon": 137.395975,
+        "lat": -4.6430299999999995
+      },
+      "bbox": {
+        "xmin": 137.37318,
+        "xmax": 137.41877,
+        "ymin": -4.66744,
+        "ymax": -4.61862,
+        "srs": "EPSG:4326"
+      }
+    },
+    {
+      "name": "D-Jezero",
+      "pm_id": "PM-MAR-D-Jezero",
+      "center": {
+        "lon": 77.3725,
+        "lat": 18.47486
+      },
+      "bbox": {
+        "xmin": 77.20333,
+        "xmax": 77.54167,
+        "ymin": 18.335,
+        "ymax": 18.61472,
+        "srs": "EPSG:4326"
+      }
+    },
+    {
+      "name": "D-Oxia_Planum",
+      "pm_id": "PM-MAR-D-Oxia_Planum",
+      "center": {
+        "lon": 25.46653,
+        "lat": 18.145690000000002
+      },
+      "bbox": {
+        "xmin": 25.25278,
+        "xmax": 25.68028,
+        "ymin": 17.34694,
+        "ymax": 18.94444,
+        "srs": "EPSG:4326"
+      }
     }
   ]
 };
