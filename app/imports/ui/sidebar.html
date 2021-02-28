@@ -1,12 +1,12 @@
 
 <!-- Sidebar  -->
 <template name="sidebar">
-    <nav id="sidebar">
+    <nav id="sidebar" style="height:100vh">
         <div class="sidebar-header">
             <img src="/assets/images/logo_black_alpha.png"/>
             <h3>Planmap</h3>
         </div>
-        <div class="sidebar-content">
+        <div class="sidebar-content" style="height:100%">
             {{> bodySelector}}
             {{#if currentBody}}
               {{> mapsMenu}}
@@ -49,7 +49,8 @@
 
 <!-- ACCORDION MENU WITH SELECTED BODY LAYERS -->
 <template name="mapsMenu">
-    <ul class="list-unstyled components">
+    <ul class="list-unstyled components"
+        style="height:50%; width:100%; overflow:hidden; overflow-y:scroll;">
       {{#each map in currentData.maps}}
         {{> menuAccordion map=map body=currentBody}}
       {{/each}}
