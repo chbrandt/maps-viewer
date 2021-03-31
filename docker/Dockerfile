@@ -15,7 +15,7 @@ RUN curl https://install.meteor.com/ | sh
 RUN useradd -m -u 1000 -g 100 user
 
 RUN cd /opt \
-    && git clone https://github.com/chbrandt/maps-viewer.git \
+    && git clone -b gmap https://github.com/chbrandt/maps-viewer.git \
     && chown -Rh user: maps-viewer
 
 USER user
